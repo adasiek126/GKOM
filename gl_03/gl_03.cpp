@@ -9,6 +9,9 @@
 #include "HalfArmModel.h"
 #include "Cylinder.h"
 #include "Box.h"
+#include "Arm.h"
+#include "CylinderModel.h"
+#include "BoxModel.h"
 using namespace std;
 
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -252,7 +255,10 @@ int main()
 			glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(2.3f*halfArm.avgX, 0.0f, 0.0f),
 		};
-		
+		Arm arm(&theProgram);
+		CylinderModel cylinderLower(&theProgram);
+		CylinderModel cylinderUpper(&theProgram, 0.35f);
+		BoxModel box(&theProgram);
 		// main event loop
 		while (!glfwWindowShouldClose(window))
 		{
@@ -283,7 +289,7 @@ int main()
 
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-			glBindVertexArray(VAO);
+			/*glBindVertexArray(VAO);
 			for (int i = 0; i < 2; i++)
 			{
 				glm::mat4 model;
@@ -299,8 +305,20 @@ int main()
 
 				glDrawElements(GL_TRIANGLES, 3*28, GL_UNSIGNED_INT, 0);
 			}
-			glBindVertexArray(0);
-			glBindVertexArray(cylinderVAO);
+			glBindVertexArray(0);*/
+			arm.setPosition(glm::vec3(0.0f, -lowerCylinderMove, 0.0f));
+			arm.setAngle(arms_angle);
+			arm.repaint();
+			glm::mat4 model;
+			cylinderLower.setTransformation(glm::translate(model, glm::vec3(2.3f / 2 * halfArm.avgX, 0.8*cylinderFirst.cylinderHeight / 2 + halfArm.avgY - lowerCylinderMove, 0.0)));
+			cylinderLower.display();
+			model = glm::mat4();
+			cylinderUpper.setTransformation(glm::translate(model, glm::vec3(2.3f / 2 * halfArm.avgX, 0.8*cylinderSecond.cylinderHeight / 2 + 0.8*cylinderFirst.cylinderHeight / 2 + halfArm.avgY, 0.0)));
+			cylinderUpper.display();
+			model = glm::mat4();
+			box.setTransformation(glm::translate(model, glm::vec3(2.3f / 2 * halfArm.avgX, -halfArm.avgY - cylinderFirst.cylinderHeight / 2, 0.0f)));
+			box.display();
+			/*glBindVertexArray(cylinderVAO);
 			glm::mat4 model;
 			model = glm::translate(model, glm::vec3(2.3f/2*halfArm.avgX, 0.8*cylinderFirst.cylinderHeight/2+halfArm.avgY-lowerCylinderMove, 0.0));
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -330,7 +348,7 @@ int main()
 			}
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 			glDrawElements(GL_TRIANGLES, 3 * 4 * Cylinder::walls, GL_UNSIGNED_INT, 0);
-			glBindVertexArray(0);
+			glBindVertexArray(0);*/
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
