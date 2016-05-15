@@ -17,6 +17,7 @@ private:
 protected:
 	virtual void generateVertices();
 public:
+	GLfloat getHeight(){ return cylinderHeight; };
 	CylinderModel(ShaderProgram* program,GLfloat radius=0.25f);
 	~CylinderModel();
 };

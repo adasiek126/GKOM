@@ -12,6 +12,8 @@
 #include "Arm.h"
 #include "CylinderModel.h"
 #include "BoxModel.h"
+#include "Holder.h"
+#include "Scene.h"
 using namespace std;
 
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -22,6 +24,8 @@ GLfloat camera_closer_y = 0.0f;
 GLfloat camera_closer_z = 0.0f;
 GLfloat arms_angle = 0.0f;
 GLfloat lowerCylinderMove = 0.0f;
+GLfloat arm_x = 0.0f;
+GLfloat arm_z = 0.0f;
 Cylinder cylinderFirst;
 Cylinder cylinderSecond;
 Box box;
@@ -84,16 +88,24 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		camera_closer_z -= 0.1f;
 	}
+	if (key == GLFW_KEY_KP_6)
+	{
+		arm_x += 0.1;
+	}
+	if (key == GLFW_KEY_KP_4)
+	{
+		arm_x -= 0.1;
+	}
+	if (key == GLFW_KEY_KP_7)
+	{
+		arm_z += 0.1;
+	}
+	if (key == GLFW_KEY_KP_1)
+	{
+		arm_z -= 0.1;
+	}
 }
-void setArmsAngle(GLfloat angle, glm::mat4x4& model, bool reverse)
-{
-	model = glm::translate(model,glm::vec3(halfArm.avgX, halfArm.avgY, 0.0f));
-	if (!reverse)
-		model = glm::rotate(model, glm::radians(-angle), glm::vec3(0.0f, 0.0f, 1.0f));
-	else
-		model = glm::rotate(model, glm::radians(-angle), glm::vec3(0.0f, 0.0f, -1.0f));
-	model = glm::translate(model, glm::vec3(-halfArm.avgX, -halfArm.avgY, 0.0f));
-}
+
 bool isArmHoldsBox(Box& box, glm::vec3 boxPosition, GLfloat armsAngle, GLfloat armWholeSize, glm::vec3 armsPivotPosition)
 {
 	GLfloat box_minY = -0.25f*box.length+boxPosition[1];
@@ -150,131 +162,19 @@ int main()
 
 		// Build, compile and link shader program
 		ShaderProgram theProgram("gl_03.vert", "gl_03.frag");
-		cylinderFirst.generateCylinderVertexes();
-		cylinderSecond.radius = 0.35f;
-		cylinderSecond.generateCylinderVertexes();
-		box.length = 2.0f;
-		box.generateVertices();
-		halfArm.generateVertises();
-		GLuint VBO, VAO, EBO, cylinderVAO, cylinderEBO, cylinderVBO, cylinderSecondVAO, cylinderSecondEBO, cylinderSecondVBO, boxVBO, boxVAO, boxEBO;
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-		glGenBuffers(1, &EBO);
-		// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
-		glBindVertexArray(VAO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(halfArm.vertices), halfArm.vertices, GL_STATIC_DRAW);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(halfArm.indices), halfArm.indices, GL_STATIC_DRAW);
-
-		// vertex geometry data
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
-		glEnableVertexAttribArray(0);
-
-		// vertex color data
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-		glEnableVertexAttribArray(1);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-
-		glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
-
-		glGenVertexArrays(1, &cylinderVAO);
-		glGenBuffers(1, &cylinderVBO);
-		glGenBuffers(1, &cylinderEBO);
-		
-		glBindVertexArray(cylinderVAO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, cylinderVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(cylinderFirst.cylinderVertex), cylinderFirst.cylinderVertex, GL_STATIC_DRAW);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cylinderEBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cylinderFirst.cylinderIndices), cylinderFirst.cylinderIndices, GL_STATIC_DRAW);
-
-		// vertex geometry data
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
-		glEnableVertexAttribArray(0);
-
-		// vertex color data
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-		glEnableVertexAttribArray(1);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-
-		glBindVertexArray(0);
-
-		glGenVertexArrays(1, &cylinderSecondVAO);
-		glGenBuffers(1, &cylinderSecondVBO);
-		glGenBuffers(1, &cylinderSecondEBO);
-
-		glBindVertexArray(cylinderSecondVAO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, cylinderSecondVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(cylinderSecond.cylinderVertex), cylinderSecond.cylinderVertex, GL_STATIC_DRAW);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cylinderSecondEBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cylinderSecond.cylinderIndices), cylinderSecond.cylinderIndices, GL_STATIC_DRAW);
-
-		// vertex geometry data
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
-		glEnableVertexAttribArray(0);
-
-		// vertex color data
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-		glEnableVertexAttribArray(1);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-
-		glBindVertexArray(0);
-		glGenVertexArrays(1, &boxVAO);
-		glGenBuffers(1, &boxVBO);
-		glGenBuffers(1, &boxEBO);
-
-		glBindVertexArray(boxVAO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, boxVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(box.vertices), box.vertices, GL_STATIC_DRAW);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, boxEBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(box.indices), box.indices, GL_STATIC_DRAW);
-
-		// vertex geometry data
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
-		glEnableVertexAttribArray(0);
-
-		// vertex color data
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-		glEnableVertexAttribArray(1);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-
-		glBindVertexArray(0);
-		glm::vec3 positions[] = {
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(2.3f*halfArm.avgX, 0.0f, 0.0f),
-		};
-		Arm arm(&theProgram);
-		CylinderModel cylinderLower(&theProgram);
-		CylinderModel cylinderUpper(&theProgram, 0.35f);
-		BoxModel box(&theProgram);
+		Scene scene(&theProgram);
 		// main event loop
 		while (!glfwWindowShouldClose(window))
 		{
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			glfwPollEvents();
 
-			
-
 			// Clear the colorbuffer
 			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
 			// Draw our first triangle
 			theProgram.Use();
-
 
 			glm::mat4 view;
 			glm::mat4 projection;
@@ -289,72 +189,18 @@ int main()
 
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-			/*glBindVertexArray(VAO);
-			for (int i = 0; i < 2; i++)
-			{
-				glm::mat4 model;
-				model = glm::translate(model, glm::vec3(0.0f, -lowerCylinderMove, 0.0f));
-				setArmsAngle(arms_angle, model, i % 2);
-				model = glm::translate(model, positions[i]);
-				
-				GLfloat angle = 180.0f*i;
-				model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-				
-				
-				glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-				glDrawElements(GL_TRIANGLES, 3*28, GL_UNSIGNED_INT, 0);
-			}
-			glBindVertexArray(0);*/
-			arm.setPosition(glm::vec3(0.0f, -lowerCylinderMove, 0.0f));
-			arm.setAngle(arms_angle);
-			arm.repaint();
-			glm::mat4 model;
-			cylinderLower.setTransformation(glm::translate(model, glm::vec3(2.3f / 2 * halfArm.avgX, 0.8*cylinderFirst.cylinderHeight / 2 + halfArm.avgY - lowerCylinderMove, 0.0)));
-			cylinderLower.display();
-			model = glm::mat4();
-			cylinderUpper.setTransformation(glm::translate(model, glm::vec3(2.3f / 2 * halfArm.avgX, 0.8*cylinderSecond.cylinderHeight / 2 + 0.8*cylinderFirst.cylinderHeight / 2 + halfArm.avgY, 0.0)));
-			cylinderUpper.display();
-			model = glm::mat4();
-			box.setTransformation(glm::translate(model, glm::vec3(2.3f / 2 * halfArm.avgX, -halfArm.avgY - cylinderFirst.cylinderHeight / 2, 0.0f)));
-			box.display();
-			/*glBindVertexArray(cylinderVAO);
-			glm::mat4 model;
-			model = glm::translate(model, glm::vec3(2.3f/2*halfArm.avgX, 0.8*cylinderFirst.cylinderHeight/2+halfArm.avgY-lowerCylinderMove, 0.0));
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-			glDrawElements(GL_TRIANGLES, 3 * 4 * Cylinder::walls, GL_UNSIGNED_INT, 0);
-			glBindVertexArray(0);
-			glBindVertexArray(cylinderSecondVAO);
-			model = glm::mat4();
-			model = glm::translate(model, glm::vec3(2.3f / 2 * halfArm.avgX, 0.8*cylinderSecond.cylinderHeight / 2 + 0.8*cylinderFirst.cylinderHeight / 2 + halfArm.avgY, 0.0));
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-			glDrawElements(GL_TRIANGLES, 3 * 4 * Cylinder::walls, GL_UNSIGNED_INT, 0);
-			glBindVertexArray(0);
-			glBindVertexArray(boxVAO);
-			model = glm::mat4();
 			
-			glm::vec3 pivotPos;
-			pivotPos[0] = positions[0][0];
-			pivotPos[1] = positions[0][1] - lowerCylinderMove;
-			pivotPos[2] = positions[0][2];
-			if (isArmHoldsBox(box, glm::vec3(2.3f / 2 * halfArm.avgX, -halfArm.avgY - cylinderFirst.cylinderHeight / 2, 0.0f), arms_angle, halfArm.wholeSize, pivotPos))
-			{
-				model = glm::translate(model, glm::vec3(2.3f / 2 * halfArm.avgX, -halfArm.avgY - lowerCylinderMove, 0.0f));
-				std::cout << "ArmHoldsBox" << std::endl;
-			}
-			else
-			{
-				model = glm::translate(model, glm::vec3(2.3f / 2 * halfArm.avgX, -halfArm.avgY - cylinderFirst.cylinderHeight / 2, 0.0f));
-			}
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-			glDrawElements(GL_TRIANGLES, 3 * 4 * Cylinder::walls, GL_UNSIGNED_INT, 0);
-			glBindVertexArray(0);*/
+			scene.getHolder()->setHolderPosition(glm::vec3(arm_x,0.0f, arm_z));
+			scene.getHolder()->setLowerCylinderOuthrusting(lowerCylinderMove);
+			scene.getHolder()->setOpenig(arms_angle);
+			scene.repaint();
+			//holder.repaint();
+			//glm::mat4 model;
+			//box.setTransformation(glm::translate(model,holder.getArm()->getLowerCenter()));
+			//box.display();
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
-		glDeleteVertexArrays(1, &VAO);
-		glDeleteBuffers(1, &VBO);
-		glDeleteBuffers(1, &EBO);
 	}
 	catch (exception ex)
 	{

@@ -86,8 +86,10 @@
     <ClCompile Include="Cuboid.cpp" />
     <ClCompile Include="CylinderModel.cpp" />
     <ClCompile Include="gl_03.cpp" />
+    <ClCompile Include="Holder.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="PartArm.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="shprogram.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -102,8 +104,10 @@
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="CylinderModel.h" />
     <ClInclude Include="HalfArmModel.h" />
+    <ClInclude Include="Holder.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="PartArm.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="shprogram.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

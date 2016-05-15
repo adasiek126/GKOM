@@ -15,6 +15,7 @@ glm::vec4& Model::getVerticeAfterTransformation(glm::vec4& vertice)
 void Model::setTransformation(glm::mat4& transformation)
 {
 	this->transformation = transformation;
+	generateCuboid();
 }
 
 void Model::display()
@@ -85,14 +86,30 @@ void Model::generateCuboid()
 			minZ = vertices[i + 2];
 		}
 	}
-	cuboid.setLBLVertex(glm::vec3(minX, minY, minZ));
-	cuboid.setLBRVertex(glm::vec3(maxX, minY, minZ));
-	cuboid.setLFLVertex(glm::vec3(minX, minY, maxZ));
-	cuboid.setLFRVertex(glm::vec3(maxX, minY, maxZ));
-	cuboid.setUBLVertex(glm::vec3(minX, maxY, minZ));
-	cuboid.setUBRVertex(glm::vec3(maxX, maxY, minZ));
-	cuboid.setUFLVertex(glm::vec3(minX, maxY, maxZ));
-	cuboid.setUFRVertex(glm::vec3(maxX, maxY, maxZ));
+	glm::vec4 beforeTransformation = glm::vec4(minX, minY, minZ, 1.0f);
+	glm::vec4 afterTransformation = getVerticeAfterTransformation(beforeTransformation);
+	cuboid.setLBLVertex(glm::vec3(afterTransformation[0],afterTransformation[1],afterTransformation[2])/*glm::vec3(minX, minY, minZ)*/);
+	beforeTransformation = glm::vec4(maxX, minY, minZ, 1.0f);
+	afterTransformation = getVerticeAfterTransformation(beforeTransformation);
+	cuboid.setLBRVertex(glm::vec3(afterTransformation[0], afterTransformation[1], afterTransformation[2])/*glm::vec3(maxX, minY, minZ)*/);
+	beforeTransformation = glm::vec4(minX, minY, maxZ, 1.0f);
+	afterTransformation = getVerticeAfterTransformation(beforeTransformation);
+	cuboid.setLFLVertex(glm::vec3(afterTransformation[0], afterTransformation[1], afterTransformation[2])/*glm::vec3(minX, minY, maxZ)*/);
+	beforeTransformation = glm::vec4(maxX, minY, maxZ, 1.0f);
+	afterTransformation = getVerticeAfterTransformation(beforeTransformation);
+	cuboid.setLFRVertex(glm::vec3(afterTransformation[0], afterTransformation[1], afterTransformation[2])/*glm::vec3(maxX, minY, maxZ)*/);
+	beforeTransformation = glm::vec4(minX, maxY, minZ, 1.0f);
+	afterTransformation = getVerticeAfterTransformation(beforeTransformation);
+	cuboid.setUBLVertex(glm::vec3(afterTransformation[0], afterTransformation[1], afterTransformation[2])/*glm::vec3(minX, maxY, minZ)*/);
+	beforeTransformation = glm::vec4(maxX, maxY, minZ, 1.0f);
+	afterTransformation = getVerticeAfterTransformation(beforeTransformation);
+	cuboid.setUBRVertex(glm::vec3(afterTransformation[0], afterTransformation[1], afterTransformation[2])/*glm::vec3(maxX, maxY, minZ)*/);
+	beforeTransformation = glm::vec4(minX, maxY, maxZ, 1.0f);
+	afterTransformation = getVerticeAfterTransformation(beforeTransformation);
+	cuboid.setUFLVertex(glm::vec3(afterTransformation[0], afterTransformation[1], afterTransformation[2])/*glm::vec3(minX, maxY, maxZ)*/);
+	beforeTransformation = glm::vec4(maxX, maxY, maxZ, 1.0f);
+	afterTransformation = getVerticeAfterTransformation(beforeTransformation);
+	cuboid.setUFRVertex(glm::vec3(afterTransformation[0], afterTransformation[1], afterTransformation[2])/*glm::vec3(maxX, maxY, maxZ)*/);
 	cuboid.setMinX(minX);
 	cuboid.setMaxX(maxX);
 	cuboid.setMinY(minY);
