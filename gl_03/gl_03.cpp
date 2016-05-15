@@ -6,30 +6,20 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "HalfArmModel.h"
-#include "Cylinder.h"
-#include "Box.h"
-#include "Arm.h"
-#include "CylinderModel.h"
-#include "BoxModel.h"
-#include "Holder.h"
 #include "Scene.h"
 using namespace std;
 
 const GLuint WIDTH = 800, HEIGHT = 600;
 GLfloat camera_x = 0.0f;
 GLfloat camera_y = 0.0f;
-GLfloat camera_closer_x = 0.0f;
+GLfloat camera_closer_x = -1.0f;
 GLfloat camera_closer_y = 0.0f;
-GLfloat camera_closer_z = 0.0f;
+GLfloat camera_closer_z = -2.0f;
 GLfloat arms_angle = 0.0f;
 GLfloat lowerCylinderMove = 0.0f;
 GLfloat arm_x = 0.0f;
 GLfloat arm_z = 0.0f;
-Cylinder cylinderFirst;
-Cylinder cylinderSecond;
-Box box;
-HalfArm halfArm;
+Scene* scene;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	cout << key << endl;
@@ -56,7 +46,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 	if (key == GLFW_KEY_KP_8)
 	{
-		if (lowerCylinderMove < cylinderFirst.cylinderHeight/2)
+		if (lowerCylinderMove < scene->getHolder()->getLowerCylinder()->getHeight()/2)
 			lowerCylinderMove += 0.01f;
 	}
 	if (key == GLFW_KEY_KP_2)
@@ -106,26 +96,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 }
 
-bool isArmHoldsBox(Box& box, glm::vec3 boxPosition, GLfloat armsAngle, GLfloat armWholeSize, glm::vec3 armsPivotPosition)
-{
-	GLfloat box_minY = -0.25f*box.length+boxPosition[1];
-	GLfloat box_maxY = 0.25f*box.length+boxPosition[1];
-	GLfloat box_minX = -0.25*box.length+boxPosition[0];
-	GLfloat box_maxX = 0.25*box.length+boxPosition[0];
-	GLfloat box_minZ = -0.25*box.length + boxPosition[2];
-	GLfloat box_maxZ = 0.25*box.length + boxPosition[2];
-	GLfloat arm_x = armsPivotPosition[0] + armWholeSize*glm::sin(glm::radians(armsAngle));
-	GLfloat arm_y = armsPivotPosition[1] + armWholeSize*glm::cos(glm::radians(armsAngle));
-	GLfloat arm_z = armsPivotPosition[2];
-	if (arm_x >= box_minX && arm_x <box_maxX && arm_y > box_minY && arm_y < box_maxY && arm_z > box_minZ && arm_z < box_maxZ)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
 int main()
 {
 	if (glfwInit() != GL_TRUE)
@@ -162,7 +132,7 @@ int main()
 
 		// Build, compile and link shader program
 		ShaderProgram theProgram("gl_03.vert", "gl_03.frag");
-		Scene scene(&theProgram);
+		scene=new Scene(&theProgram);
 		// main event loop
 		while (!glfwWindowShouldClose(window))
 		{
@@ -190,17 +160,14 @@ int main()
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 			
-			scene.getHolder()->setHolderPosition(glm::vec3(arm_x,0.0f, arm_z));
-			scene.getHolder()->setLowerCylinderOuthrusting(lowerCylinderMove);
-			scene.getHolder()->setOpenig(arms_angle);
-			scene.repaint();
-			//holder.repaint();
-			//glm::mat4 model;
-			//box.setTransformation(glm::translate(model,holder.getArm()->getLowerCenter()));
-			//box.display();
+			scene->getHolder()->setHolderPosition(glm::vec3(arm_x,0.0f, arm_z));
+			scene->getHolder()->setLowerCylinderOuthrusting(lowerCylinderMove);
+			scene->getHolder()->setOpenig(arms_angle);
+			scene->repaint();
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
+		delete scene;
 	}
 	catch (exception ex)
 	{

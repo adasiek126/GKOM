@@ -1,11 +1,15 @@
-﻿Build started 2016-05-15 14:34:18.
-     1>Project "C:\Users\Admin\Documents\GKOM\GKOM\gl_03\gl_03.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2016-05-15 22:44:10.
+     1>Project "C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\gl_03\gl_03.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Scene.cpp
-         Scene.cpp
-     1>c:\users\admin\documents\gkom\gkom\gl_03\Scene.h(12): warning C4305: 'initializing' : truncation from 'double' to 'GLfloat'
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt gl_03.cpp
+         gl_03.cpp
+     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\Scene.h(12): warning C4305: 'initializing' : truncation from 'double' to 'GLfloat'
+     1>gl_03.cpp(83): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
+     1>gl_03.cpp(87): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
+     1>gl_03.cpp(91): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
+     1>gl_03.cpp(95): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Admin\Documents\GKOM\GKOM\Debug\gl_03.exe" /INCREMENTAL /NOLOGO opengl32.lib glfw3.lib glew32s.lib soil.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Admin\Documents\GKOM\GKOM\Debug\gl_03.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Admin\Documents\GKOM\GKOM\Debug\gl_03.lib" /MACHINE:X86 Debug\Arm.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.exe" /INCREMENTAL /NOLOGO opengl32.lib glfw3.lib glew32s.lib soil.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.lib" /MACHINE:X86 Debug\Arm.obj
          Debug\BoxModel.obj
          Debug\Cuboid.obj
          Debug\CylinderModel.obj
@@ -15,9 +19,44 @@
          Debug\PartArm.obj
          Debug\Scene.obj
          Debug\shprogram.obj
-         gl_03.vcxproj -> C:\Users\Admin\Documents\GKOM\GKOM\Debug\gl_03.exe
-     1>Done Building Project "C:\Users\Admin\Documents\GKOM\GKOM\gl_03\gl_03.vcxproj" (Build target(s)).
+     1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
+     1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
+     1>PartArm.obj : warning LNK4217: locally defined symbol ___glewBindBuffer imported in function "public: __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >(char const *)" (??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@PBD@Z)
+     1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
+     1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
+     1>PartArm.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
+     1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
+     1>CylinderModel.obj : warning LNK4217: locally defined symbol ___glewGenBuffers imported in function __ehhandler$?_Copy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXII@Z
+     1>PartArm.obj : warning LNK4217: locally defined symbol ___glewGenBuffers imported in function "public: void __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Copy(unsigned int,unsigned int)" (?_Copy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXII@Z)
+     1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
+     1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
+     1>PartArm.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
+     1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
+     1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
+     1>PartArm.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
+     1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
+     1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
+     1>Model.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
+     1>PartArm.obj : warning LNK4217: locally defined symbol ___glewBindVertexArray imported in function __catch$?_Copy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXII@Z$1
+     1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
+     1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
+     1>PartArm.obj : warning LNK4217: locally defined symbol ___glewGenVertexArrays imported in function __catch$?_Copy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXII@Z$1
+     1>Model.obj : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
+     1>Model.obj : warning LNK4049: locally defined symbol ___glewUniformMatrix4fv imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewAttachShader imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewCompileShader imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewCreateProgram imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewCreateShader imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewDeleteShader imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewGetProgramInfoLog imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewGetProgramiv imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewGetShaderInfoLog imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewGetShaderiv imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewLinkProgram imported
+     1>shprogram.obj : warning LNK4049: locally defined symbol ___glewShaderSource imported
+         gl_03.vcxproj -> C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.exe
+     1>Done Building Project "C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\gl_03\gl_03.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.64
+Time Elapsed 00:00:01.60

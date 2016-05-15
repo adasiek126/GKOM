@@ -48,11 +48,12 @@ void Scene::generateBoxPosition()
 	else
 	{
 		glm::vec3 boxPosition=box->getPosition();
-		if (boxPosition[1] > -1.5f)
+		if (boxPosition[1] > -2.0f)
 		{
-			boxPosition[1] -= 0.1f;
+			boxPosition[1] -= 0.01f;
 		}
 		glm::mat4 model;
+		box->setPosition(boxPosition);
 		box->setTransformation(glm::translate(model, boxPosition));
 	}
 }

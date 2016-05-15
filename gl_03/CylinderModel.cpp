@@ -138,4 +138,6 @@ void CylinderModel::generateVertices()
 }
 CylinderModel::~CylinderModel()
 {
+	delete[] vertices;
+	delete[] indices;
 }
