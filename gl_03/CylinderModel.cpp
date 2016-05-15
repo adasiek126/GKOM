@@ -1,9 +1,10 @@
 #include "CylinderModel.h"
 
 
-CylinderModel::CylinderModel(ShaderProgram* program, GLfloat radius) : Model(program)
+CylinderModel::CylinderModel(ShaderProgram* program, GLfloat height,GLfloat radius) : Model(program)
 {
 	this->radius = radius;
+	this->cylinderHeight = height;
 	verticesSize = 6 * (CylinderModel::walls * 2 + 2);
 	indicesSize = 3 * 4 * CylinderModel::walls;
 	generateVertices();

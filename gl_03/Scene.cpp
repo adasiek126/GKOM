@@ -5,6 +5,7 @@ Scene::Scene(ShaderProgram* program)
 {
 	holder = new Holder(program);
 	box = new BoxModel(program);
+	belt = new Belt(program);
 	glm::mat4 model;
 	box->setPosition(boxInitPosition);
 	box->setTransformation(glm::translate(model, boxInitPosition));
@@ -14,8 +15,9 @@ void Scene::repaint()
 	generateBoxPosition();
 	box->display();
 	holder->repaint();
+	belt->repaint();
 }
-bool Scene::checkInteraction()
+bool Scene::checkInteractionWithArm()
 {
 	glm::vec3 bUFL = box->getCuboid().getUFLVertex();
 	glm::vec3 bUBL = box->getCuboid().getUBLVertex();
@@ -40,7 +42,7 @@ bool Scene::checkInteraction()
 void Scene::generateBoxPosition()
 {
 	glm::mat4 model;
-	if (checkInteraction())
+	if (checkInteractionWithArm())
 	{
 		box->setPosition(holder->getArm()->getLowerCenter());
 		box->setTransformation(glm::translate(model, holder->getArm()->getLowerCenter()));
@@ -48,7 +50,12 @@ void Scene::generateBoxPosition()
 	else
 	{
 		glm::vec3 boxPosition=box->getPosition();
-		if (boxPosition[1] > -2.0f)
+		if (checkInteractionWithBelt())
+		{
+			if (belt->isOn())
+				boxPosition[0] += belt->getSpeed();
+		}
+		else if (boxPosition[1] > -2.0f)
 		{
 			boxPosition[1] -= 0.01f;
 		}
@@ -56,6 +63,26 @@ void Scene::generateBoxPosition()
 		box->setPosition(boxPosition);
 		box->setTransformation(glm::translate(model, boxPosition));
 	}
+}
+bool Scene::checkInteractionWithBelt()
+{
+	glm::vec3 bLFL = box->getCuboid().getLFLVertex();
+	glm::vec3 bLBL = box->getCuboid().getLBLVertex();
+	glm::vec3 bLFR = box->getCuboid().getLFRVertex();
+	glm::vec3 bLBR = box->getCuboid().getLBRVertex();
+	glm::vec3 beltUFL = belt->getCuboid().getUFLVertex();
+	glm::vec3 beltUBR = belt->getCuboid().getUBRVertex();
+	if (bLFL[0] > beltUFL[0] && bLFL[0] < beltUBR[0])
+	{
+		if (bLFL[1] - 0.1f < beltUFL[1])
+		{
+			if (bLFL[2]<beltUFL[2] && bLFL[2] > beltUBR[2])
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
 Scene::~Scene()
 {

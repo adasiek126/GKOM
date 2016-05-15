@@ -1,12 +1,15 @@
 #pragma once
 #include "Holder.h"
 #include "BoxModel.h"
+#include "Belt.h"
 class Scene
 {
 private:
 	BoxModel* box;
 	Holder* holder;
-	bool checkInteraction();
+	Belt* belt;
+	bool checkInteractionWithArm();
+	bool checkInteractionWithBelt();
 	void generateBoxPosition();
 	glm::vec3 boxInitPosition;
 	GLfloat acceleration = 0.1;

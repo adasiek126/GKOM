@@ -47,12 +47,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_KP_8)
 	{
 		if (lowerCylinderMove < scene->getHolder()->getLowerCylinder()->getHeight()/2)
-			lowerCylinderMove += 0.01f;
+			lowerCylinderMove += 0.05f;
 	}
 	if (key == GLFW_KEY_KP_2)
 	{
 		if (lowerCylinderMove > -0.01f)
-			lowerCylinderMove -= 0.01f;
+			lowerCylinderMove -= 0.05f;
 	}
 	if (key == GLFW_KEY_PAGE_UP)
 	{
@@ -160,7 +160,7 @@ int main()
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 			
-			scene->getHolder()->setHolderPosition(glm::vec3(arm_x,0.0f, arm_z));
+			scene->getHolder()->setHolderPosition(glm::vec3(arm_x,1.0f, arm_z));
 			scene->getHolder()->setLowerCylinderOuthrusting(lowerCylinderMove);
 			scene->getHolder()->setOpenig(arms_angle);
 			scene->repaint();

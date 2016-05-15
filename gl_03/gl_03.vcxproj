@@ -82,6 +82,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arm.cpp" />
+    <ClCompile Include="Belt.cpp" />
     <ClCompile Include="BoxModel.cpp" />
     <ClCompile Include="Cuboid.cpp" />
     <ClCompile Include="CylinderModel.cpp" />
@@ -98,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arm.h" />
+    <ClInclude Include="Belt.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="BoxModel.h" />
     <ClInclude Include="Cuboid.h" />
