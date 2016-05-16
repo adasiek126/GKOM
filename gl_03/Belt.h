@@ -22,9 +22,10 @@ private:
 	GLfloat blue = 0.5f;
 	glm::vec3 position;
 	bool on;
-	GLfloat speed = 0.01f;
+	GLfloat speed = 0.001f;
 protected:
 	void generateVertices();
+	void generateNormals(bool abs = false);
 public:
 	bool isOn(){ return on; }
 	GLfloat getSpeed(){ return speed; }

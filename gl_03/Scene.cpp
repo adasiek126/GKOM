@@ -60,7 +60,7 @@ void Scene::generateBoxPosition()
 		}
 		else if (boxPosition[1] > -2.0f)
 		{
-			boxPosition[1] -= 0.01f;
+			boxPosition[1] -= acceleration;
 		}
 		glm::mat4 model;
 		box->setPosition(boxPosition);

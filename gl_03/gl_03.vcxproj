@@ -95,20 +95,24 @@
     <ClCompile Include="shprogram.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="blinn_phong_light.glsl" />
     <None Include="gl_03.frag" />
     <None Include="gl_03.vert" />
+    <None Include="lambert_light.glsl" />
+    <None Include="light_model.glsl" />
+    <None Include="light_model_static.glsl" />
+    <None Include="materials.glsl" />
+    <None Include="materials_static.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arm.h" />
     <ClInclude Include="Belt.h" />
-    <ClInclude Include="Box.h" />
     <ClInclude Include="BoxModel.h" />
     <ClInclude Include="Cuboid.h" />
-    <ClInclude Include="Cylinder.h" />
     <ClInclude Include="CylinderModel.h" />
     <ClInclude Include="Floor.h" />
-    <ClInclude Include="HalfArmModel.h" />
     <ClInclude Include="Holder.h" />
+    <ClInclude Include="materials.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="PartArm.h" />
     <ClInclude Include="Scene.h" />

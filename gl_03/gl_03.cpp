@@ -22,7 +22,6 @@ GLfloat arm_z = 0.0f;
 Scene* scene;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-	cout << key << endl;
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	if (key == GLFW_KEY_UP)
@@ -80,19 +79,23 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 	if (key == GLFW_KEY_KP_6)
 	{
-		arm_x += 0.1;
+		if (arm_x < 9.0f)
+			arm_x += 0.1;
 	}
 	if (key == GLFW_KEY_KP_4)
 	{
-		arm_x -= 0.1;
+		if (arm_x > -9.0f)
+			arm_x -= 0.1;
 	}
 	if (key == GLFW_KEY_KP_7)
 	{
-		arm_z += 0.1;
+		if (arm_z <9.0f)
+			arm_z += 0.1;
 	}
 	if (key == GLFW_KEY_KP_1)
 	{
-		arm_z -= 0.1;
+		if (arm_z > -9.0f)
+			arm_z -= 0.1;
 	}
 }
 
@@ -109,7 +112,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	try
 	{
-		GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "GKOM - OpenGL 03", nullptr, nullptr);
+		GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "GKOM - OpenGL Projekt", nullptr, nullptr);
 		if (window == nullptr)
 			throw exception("GLFW window not created");
 		glfwMakeContextCurrent(window);
@@ -143,7 +146,6 @@ int main()
 			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			// Draw our first triangle
 			theProgram.Use();
 
 			glm::mat4 view;
@@ -156,7 +158,8 @@ int main()
 			GLint modelLoc = glGetUniformLocation(theProgram.get_programID(), "model");
 			GLint viewLoc = glGetUniformLocation(theProgram.get_programID(), "view");
 			GLint projLoc = glGetUniformLocation(theProgram.get_programID(), "projection");
-
+			GLint lightPosLoc = glGetUniformLocation(theProgram.get_programID(), "lightPos");
+			glUniform3f(lightPosLoc, 0.0f, -10.0f, 5.0f);
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 			

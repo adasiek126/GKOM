@@ -55,18 +55,15 @@
   <ItemGroup>
     <None Include="gl_03.frag" />
     <None Include="gl_03.vert" />
+    <None Include="materials.glsl" />
+    <None Include="materials_static.glsl" />
+    <None Include="blinn_phong_light.glsl" />
+    <None Include="lambert_light.glsl" />
+    <None Include="light_model.glsl" />
+    <None Include="light_model_static.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shprogram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HalfArmModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Cylinder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
@@ -97,6 +94,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Floor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materials.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

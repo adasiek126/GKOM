@@ -3,7 +3,7 @@
 
 Model::Model(ShaderProgram* program)
 {
-	
+	normalsSize = 0;
 	this->program = program;
 }
 
@@ -23,7 +23,6 @@ void Model::display()
 	glBindVertexArray(VAO);
 	GLint modelLoc = glGetUniformLocation(program->get_programID(), "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transformation));
-	std::cout << indicesSize << std::endl;
 	glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
@@ -117,6 +116,75 @@ void Model::generateCuboid()
 	cuboid.setMinZ(minZ);
 	cuboid.setMaxZ(maxZ);
 }
+void Model::generateNormals(bool abs)
+{
+	normals = new GLfloat[verticesSize/2];
+	memset(normals, 0, sizeof(GLfloat)*(verticesSize/2));
+	for (int i = 0; i < indicesSize/3; i++)
+	{
+		glm::vec3 v10; 
+		glm::vec3 v21;
+		if (i % 2 == 1)
+		{
+			v10=(glm::vec3(vertices[6 * indices[3 * i + 1] + 0], vertices[6 * indices[3 * i + 1] + 1], vertices[6 * indices[3 * i + 1] + 2]) - glm::vec3(vertices[6 * indices[3 * i + 0] + 0], vertices[6 * indices[3 * i + 0] + 1], vertices[6 * indices[3 * i + 0] + 2]));
+			v21=(glm::vec3(vertices[6 * indices[3 * i + 2] + 0], vertices[6 * indices[3 * i + 2] + 1], vertices[6 * indices[3 * i + 2] + 2]) - glm::vec3(vertices[6 * indices[3 * i + 1] + 0], vertices[6 * indices[3 * i + 1] + 1], vertices[6 * indices[3 * i + 1] + 2]));
+		}
+		else
+		{
+			v10 = (-glm::vec3(vertices[6 * indices[3 * i + 1] + 0], vertices[6 * indices[3 * i + 1] + 1], vertices[6 * indices[3 * i + 1] + 2]) + glm::vec3(vertices[6 * indices[3 * i + 0] + 0], vertices[6 * indices[3 * i + 0] + 1], vertices[6 * indices[3 * i + 0] + 2]));
+			v21 = (glm::vec3(vertices[6 * indices[3 * i + 2] + 0], vertices[6 * indices[3 * i + 2] + 1], vertices[6 * indices[3 * i + 2] + 2]) - glm::vec3(vertices[6 * indices[3 * i + 1] + 0], vertices[6 * indices[3 * i + 1] + 1], vertices[6 * indices[3 * i + 1] + 2]));
+		}
+		const glm::vec3 normal(glm::normalize(glm::cross(v10, v21)));
+		if (abs)
+		{
+			normals[3 * indices[3 * i + 0] + 0] += std::abs(normal[0]);
+			normals[3 * indices[3 * i + 0] + 1] += std::abs(normal[1]);
+			normals[3 * indices[3 * i + 0] + 2] += std::abs(normal[2]);
+
+			normals[3 * indices[3 * i + 1] + 0] += std::abs(normal[0]);
+			normals[3 * indices[3 * i + 1] + 1] += std::abs(normal[1]);
+			normals[3 * indices[3 * i + 1] + 2] += std::abs(normal[2]);
+
+			normals[3 * indices[3 * i + 2] + 0] += std::abs(normal[0]);
+			normals[3 * indices[3 * i + 2] + 1] += std::abs(normal[1]);
+			normals[3 * indices[3 * i + 2] + 2] += std::abs(normal[2]);
+		}
+		else
+		{
+			normals[3 * indices[3 * i + 0] + 0] += (normal[0]);
+			normals[3 * indices[3 * i + 0] + 1] += (normal[1]);
+			normals[3 * indices[3 * i + 0] + 2] += (normal[2]);
+
+			normals[3 * indices[3 * i + 1] + 0] += (normal[0]);
+			normals[3 * indices[3 * i + 1] + 1] += (normal[1]);
+			normals[3 * indices[3 * i + 1] + 2] += (normal[2]);
+
+			normals[3 * indices[3 * i + 2] + 0] += (normal[0]);
+			normals[3 * indices[3 * i + 2] + 1] += (normal[1]);
+			normals[3 * indices[3 * i + 2] + 2] += (normal[2]);
+		}
+
+	}
+	for (int i = 0; i < verticesSize / 6; i++)
+	{
+		glm::vec3 temp = glm::vec3(normals[3 * i + 0], normals[3 * i + 1], normals[3 * i + 2]);
+		if (glm::length(temp) > 0.001f)
+		{
+			const glm::vec3 normal(glm::normalize(glm::vec3(normals[3 * i + 0], normals[3 * i + 1], normals[3 * i + 2])));
+			normals[3 * i + 0] = normal[0];
+			normals[3 * i + 1] = normal[1];
+			normals[3 * i + 2] = normal[2];
+		}
+		else
+		{
+			normals[3 * i + 0] = 0.0f;
+			normals[3 * i + 1] = 0.0f;
+			normals[3 * i + 2] = 0.0f;
+		}
+	}
+	normalsSize = verticesSize / 2;
+}
 Model::~Model()
 {
+	//delete[] normals;
 }

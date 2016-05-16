@@ -11,6 +11,7 @@ private:
 	const GLfloat height = 0.5f;
 protected:
 	virtual void generateVertices();
+	void generateNormals(bool abs = false);
 public:
 	PartArm(ShaderProgram* program);
 	GLfloat getPivotX();

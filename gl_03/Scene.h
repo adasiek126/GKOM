@@ -14,7 +14,7 @@ private:
 	bool checkInteractionWithBelt();
 	void generateBoxPosition();
 	glm::vec3 boxInitPosition;
-	GLfloat acceleration = 0.1;
+	GLfloat acceleration = 0.003f;
 public:
 	Holder* getHolder(){ return holder; };
 	BoxModel* getBox(){ return box; };
