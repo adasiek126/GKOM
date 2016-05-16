@@ -5,6 +5,7 @@ Floor::Floor(ShaderProgram* program) :Model(program)
 {
 	this->verticesSize = 6 * 4;
 	this->indicesSize = 3*2;
+	material = MTL_YELLOW_RUBBER;
 	generateVertices();
 	generateCuboid();
 	generateNormals();

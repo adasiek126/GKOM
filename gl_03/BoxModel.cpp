@@ -8,6 +8,7 @@ BoxModel::BoxModel(ShaderProgram* program) :Model(program)
 	a = length;
 	b = length;
 	c = length;
+	material = MTL_RED_PLASTIC;
 	generateVertices();
 	generateCuboid();
 	generateNormals();
@@ -45,6 +46,7 @@ BoxModel::BoxModel(ShaderProgram* program, GLfloat a, GLfloat b, GLfloat c, GLfl
 {
 	verticesSize = 6 * 8;
 	indicesSize = 12 * 3;
+	material = MTL_POLISHED_COPPER;
 	this->a = a;
 	this->b = b;
 	this->c = c;

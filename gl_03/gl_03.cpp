@@ -170,7 +170,7 @@ int main()
 		cout << "Max texture coords allowed: " << nrAttributes << std::endl;
 
 		// Build, compile and link shader program
-		ShaderProgram theProgram("gl_03.vert", "gl_03.frag");
+		ShaderProgram theProgram("gl_03.vert", "gl_03.frag", "materials_static.glsl");
 		scene=new Scene(&theProgram);
 		// main event loop
 		while (!glfwWindowShouldClose(window))

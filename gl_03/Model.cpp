@@ -4,6 +4,7 @@
 Model::Model(ShaderProgram* program)
 {
 	normalsSize = 0;
+	material = MTL_DEFAULT;
 	this->program = program;
 }
 
@@ -23,6 +24,7 @@ void Model::display()
 	glBindVertexArray(VAO);
 	GLint modelLoc = glGetUniformLocation(program->get_programID(), "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transformation));
+	glUniform1i(glGetUniformLocation(program->get_programID(), "material"), material);
 	glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
