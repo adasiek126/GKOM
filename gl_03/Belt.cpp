@@ -3,8 +3,12 @@
 
 Belt::Belt(ShaderProgram* program) :Model(program)
 {
-	this->verticesSize = 6 * 8;// 6 * (8 + 2 * (2 + walls * 2));
-	this->indicesSize = 12;// 3 * (4 + 2 * (walls * 2));
+	this->verticesSize = 6 * (8 + 2 * (walls * 2-2));
+	this->indicesSize =  3 * (4 + 2 * (walls * 2));
+	cylinderLeft = new CylinderModel(program, depth + 0.5f, height / 2 - 0.01f*(height/2), 0.0f, 0.0f, 0.0f);
+	cylinderRight = new CylinderModel(program, depth + 0.5f, height / 2 - 0.01f*(height / 2), 0.0f, 0.0f, 0.0f);
+	frontSupport = new BoxModel(program, 2.0f*(centerY + 2.5f), 2.05f*width, 0.25f,0.3f,0.3f,0.2f);
+	backSupport = new BoxModel(program, 2.0f*(centerY + 2.5f), 2.05f*width, 0.25f, 0.3f, 0.3f, 0.2f);
 	generateVertices();
 	generateCuboid();
 	on = true;
@@ -62,16 +66,165 @@ void Belt::generateVertices()
 		indices[i] = indices_pom[i];
 	}
 
+	GLfloat angleInc = 180.0f / walls;
+	GLfloat radianAngleInc = glm::radians(angleInc);
+	GLfloat angle = -90.0f;
+	GLfloat radianAngle = glm::radians(angle);
+	bool odd = false;
+	for (int i = 8 * 6; i < 6*(8+(walls * 2 - 2)); i += 6)
+	{
+		vertices[i] = centerX + width / 2 + height / 2 * glm::cos(radianAngle);
+		vertices[i + 1] = centerY + height / 2 * glm::sin(radianAngle);
+		if (odd)
+		{
+			vertices[i + 2] = centerZ - depth / 2;
+			odd = false;
+			radianAngle += radianAngleInc;
+		}
+		else
+		{
+			vertices[i + 2] = centerZ + depth / 2;
+			odd = true;
+		}
+		vertices[i + 3] = red;
+		vertices[i + 4] = green;
+		vertices[i + 5] = blue;
+	}
+	radianAngle = glm::radians(-angle);
+	for (int i = 6 * (8 + (walls * 2 - 2)); i < verticesSize; i += 6)
+	{
+		vertices[i] = centerX - width / 2 + height / 2 * glm::cos(radianAngle);
+		vertices[i + 1] = centerY + height / 2 * glm::sin(radianAngle);
+		if (odd)
+		{
+			vertices[i + 2] = centerZ - depth / 2;
+			odd = false;
+			radianAngle += radianAngleInc;
+		}
+		else
+		{
+			vertices[i + 2] = centerZ + depth / 2;
+			odd = true;
+		}
+		vertices[i + 3] = red;
+		vertices[i + 4] = green;
+		vertices[i + 5] = blue;
+	}
+	//Budowa scian bocznych
+	GLuint vertexNumber = 6;
+	GLuint lastVertexIndex = 8 + walls * 2 - 3;
+	odd = true;
+	for (int i = 12; i < 3 * (4 + (walls * 2)); i += 3)
+	{
+		indices[i] = vertexNumber;
+		if (vertexNumber + 3 > lastVertexIndex)
+		{
+			indices[i + 2] = 2;
+		}
+		else
+		{
+			indices[i + 2] = vertexNumber + 3;
+		}
+		if (odd)
+		{
+			indices[i + 1] = vertexNumber + 1;
+			odd = false;
+		}
+		else
+		{
+			if (vertexNumber + 2 > lastVertexIndex)
+			{
+				indices[i + 1] = 3;
+			}
+			else
+			{
+				indices[i + 1] = vertexNumber + 2;
+			}
+			vertexNumber += 2;
+			odd = true;
+		}
+	}
+	GLuint lastVertex = vertexNumber;
+	int begin = 3 * (4 + (walls * 2));
+	lastVertexIndex = (8 + 2*(walls * 2 - 2)) - 1;
+	odd = true;
+	for (int i = begin; i < indicesSize; i += 3)
+	{
+		if (i == begin)
+		{
+			indices[i] = lastVertex;
+			indices[i + 1] = 0;
+			indices[i + 2] = 1;
+			continue;
+		}
+		if (i == begin + 3)
+		{
+			indices[i] = lastVertex;
+			indices[i + 1] = lastVertex+1;
+			indices[i + 2] = 1;
+			continue;
+		}
+		if (i == indicesSize - 3)
+		{
+			indices[i] = lastVertexIndex;
+			indices[i + 1] = lastVertexIndex - 1;
+			indices[i + 2] = 5;
+			continue;
+		}
+		if (i == indicesSize - 6)
+		{
+			indices[i] = lastVertexIndex;
+			indices[i + 1] = 4;
+			indices[i + 2] = 5;
+			continue;
+		}
+		indices[i] = vertexNumber;
+		indices[i + 2] = vertexNumber + 3;
+		if (odd)
+		{
+			indices[i + 1] = vertexNumber + 1;
+			odd = false;
+		}
+		else
+		{
+			indices[i + 1] = vertexNumber + 2;
+			vertexNumber += 2;
+			odd = true;
+		}
+	}
 }
 
 void Belt::repaint()
 {
 	glm::mat4 model;
+	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::translate(model, glm::vec3(position[0] - width / 2 + centerX, position[2]+centerZ,position[1]-centerY));
+	cylinderLeft->setTransformation(model);
+	cylinderLeft->display();
+	model = glm::mat4();
+	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::translate(model, glm::vec3(position[0] + width / 2 + centerX, position[2] + centerZ, position[1] - centerY));
+	cylinderRight->setTransformation(model);
+	cylinderRight->display();
+	model = glm::mat4();
+	model = glm::translate(model, glm::vec3(position[0]+centerX, position[1]+centerY-frontSupport->getHeight()/4 , position[2]+centerZ+1.1f*depth/2));
+	frontSupport->setTransformation(model);
+	frontSupport->display();
+	model = glm::mat4();
+	model = glm::translate(model, glm::vec3(position[0] + centerX, position[1] + centerY - frontSupport->getHeight() / 4, position[2] + centerZ - 1.1f*depth / 2));
+	backSupport->setTransformation(model);
+	backSupport->display();
+	model = glm::mat4();
 	this->setTransformation(glm::translate(model, position));
 	this->display();
+	
 }
 Belt::~Belt()
 {
 	delete[] vertices;
 	delete[] indices;
+	delete cylinderLeft;
+	delete cylinderRight;
+	delete frontSupport;
+	delete backSupport;
 }

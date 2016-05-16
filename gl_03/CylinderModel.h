@@ -19,6 +19,7 @@ protected:
 public:
 	GLfloat getHeight(){ return cylinderHeight; };
 	CylinderModel(ShaderProgram* program,GLfloat height,GLfloat radius=0.25f);
+	CylinderModel(ShaderProgram* program, GLfloat height, GLfloat radius, GLfloat red, GLfloat green, GLfloat blue);
 	~CylinderModel();
 };
 

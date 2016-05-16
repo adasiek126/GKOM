@@ -6,6 +6,8 @@ Scene::Scene(ShaderProgram* program)
 	holder = new Holder(program);
 	box = new BoxModel(program);
 	belt = new Belt(program);
+	floor = new Floor(program);
+	floor->setPosition(glm::vec3(0.0f, -2.52f, 0.0f));
 	glm::mat4 model;
 	box->setPosition(boxInitPosition);
 	box->setTransformation(glm::translate(model, boxInitPosition));
@@ -16,6 +18,7 @@ void Scene::repaint()
 	box->display();
 	holder->repaint();
 	belt->repaint();
+	floor->repaint();
 }
 bool Scene::checkInteractionWithArm()
 {
@@ -72,7 +75,7 @@ bool Scene::checkInteractionWithBelt()
 	glm::vec3 bLBR = box->getCuboid().getLBRVertex();
 	glm::vec3 beltUFL = belt->getCuboid().getUFLVertex();
 	glm::vec3 beltUBR = belt->getCuboid().getUBRVertex();
-	if (bLFL[0] > beltUFL[0] && bLFL[0] < beltUBR[0])
+	if (bLFL[0]+0.2f > beltUFL[0] && bLFL[0]-0.2f < beltUBR[0])
 	{
 		if (bLFL[1] - 0.1f < beltUFL[1])
 		{
@@ -88,4 +91,6 @@ Scene::~Scene()
 {
 	delete box;
 	delete holder;
+	delete belt;
+	delete floor;
 }

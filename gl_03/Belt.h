@@ -1,9 +1,15 @@
 #pragma once
 #include "Model.h"
+#include "CylinderModel.h"
+#include "BoxModel.h"
 class Belt :
 	public Model
 {
 private:
+	CylinderModel* cylinderLeft;
+	CylinderModel* cylinderRight;
+	BoxModel* frontSupport;
+	BoxModel* backSupport;
 	const GLuint walls = 48;
 	GLfloat centerX = 1.0f;
 	GLfloat centerZ = 2.0f;
