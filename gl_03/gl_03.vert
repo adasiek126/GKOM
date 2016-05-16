@@ -14,6 +14,6 @@ void main()
 {
     gl_Position = projection* view * model * vec4(position, 1.0);
     ourColor = color; // Set ourColor to the input color we got from the vertex data
-	ourNormal = normal;
+	ourNormal = mat3(transpose(inverse(model))) * normal;
 	FragPos = vec3(model * vec4(position, 1.0f));
 } 

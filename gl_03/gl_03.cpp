@@ -19,6 +19,10 @@ GLfloat arms_angle = 0.0f;
 GLfloat lowerCylinderMove = 0.0f;
 GLfloat arm_x = 0.0f;
 GLfloat arm_z = 0.0f;
+GLfloat lightStr = 1.0f;
+GLfloat light_x = 0.0f;
+GLfloat light_y = -10.0f;
+GLfloat light_z = 5.0f;
 Scene* scene;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -97,6 +101,38 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		if (arm_z > -9.0f)
 			arm_z -= 0.1;
 	}
+	if (key == GLFW_KEY_BACKSLASH)
+	{
+		lightStr += 0.1f;
+	}
+	if (key == GLFW_KEY_RIGHT_BRACKET)
+	{
+		lightStr -= 0.1f;
+	}
+	if (key == GLFW_KEY_1)
+	{
+		light_x += 0.1f;
+	}
+	if (key == GLFW_KEY_2)
+	{
+		light_x -= 0.1f;
+	}
+	if (key == GLFW_KEY_3)
+	{
+		light_y += 0.1f;
+	}
+	if (key == GLFW_KEY_4)
+	{
+		light_y -= 0.1f;
+	}
+	if (key == GLFW_KEY_5)
+	{
+		light_z += 0.1f;
+	}
+	if (key == GLFW_KEY_6)
+	{
+		light_z -= 0.1f;
+	}
 }
 
 int main()
@@ -159,7 +195,11 @@ int main()
 			GLint viewLoc = glGetUniformLocation(theProgram.get_programID(), "view");
 			GLint projLoc = glGetUniformLocation(theProgram.get_programID(), "projection");
 			GLint lightPosLoc = glGetUniformLocation(theProgram.get_programID(), "lightPos");
-			glUniform3f(lightPosLoc, 0.0f, -10.0f, 5.0f);
+			GLint viewPosLoc = glGetUniformLocation(theProgram.get_programID(), "viewPos");
+			GLint lightStrLoc = glGetUniformLocation(theProgram.get_programID(), "lightStrength");
+			glUniform1f(lightStrLoc, lightStr);
+			glUniform3f(viewPosLoc, camera_closer_x, camera_closer_y, camera_closer_z - 3.0f);
+			glUniform3f(lightPosLoc, light_x, light_y, light_z);
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 			
