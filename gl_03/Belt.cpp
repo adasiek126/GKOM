@@ -5,7 +5,7 @@ Belt::Belt(ShaderProgram* program) :Model(program)
 {
 	this->verticesSize = 6 * (8 + 2 * (walls * 2-2));
 	this->indicesSize =  3 * (4 + 2 * (walls * 2));
-	material = MTL_CYAN_RUBBER;
+	material = getMaterialStruct(MTL_CYAN_RUBBER);
 	cylinderLeft = new CylinderModel(program, depth + 0.5f, height / 2 - 0.01f*(height/2), 0.0f, 0.0f, 0.0f);
 	cylinderRight = new CylinderModel(program, depth + 0.5f, height / 2 - 0.01f*(height / 2), 0.0f, 0.0f, 0.0f);
 	frontSupport = new BoxModel(program, 2.0f*(centerY + 2.5f), 2.05f*width, 0.25f,0.3f,0.3f,0.2f);

@@ -24,6 +24,14 @@ GLfloat light_x = 0.0f;
 GLfloat light_y = -10.0f;
 GLfloat light_z = 5.0f;
 Scene* scene;
+struct Light {
+	glm::vec3 position;
+
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+};
+Light light;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -111,27 +119,63 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 	if (key == GLFW_KEY_1)
 	{
-		light_x += 0.1f;
+		light.position[0] += 0.1f;
 	}
 	if (key == GLFW_KEY_2)
 	{
-		light_x -= 0.1f;
+		light.position[0] -= 0.1f;
 	}
 	if (key == GLFW_KEY_3)
 	{
-		light_y += 0.1f;
+		light.position[1] += 0.1f;
 	}
 	if (key == GLFW_KEY_4)
 	{
-		light_y -= 0.1f;
+		light.position[1] -= 0.1f;
 	}
 	if (key == GLFW_KEY_5)
 	{
-		light_z += 0.1f;
+		light.position[2] += 0.1f;
 	}
 	if (key == GLFW_KEY_6)
 	{
-		light_z -= 0.1f;
+		light.position[2] -= 0.1f;
+	}
+	if (key == GLFW_KEY_A)
+	{
+		light.ambient[0] += 0.1f;
+		light.ambient[1] += 0.1f;
+		light.ambient[2] += 0.1f;
+	}
+	if (key == GLFW_KEY_Z)
+	{
+		light.ambient[0] -= 0.1f;
+		light.ambient[1] -= 0.1f;
+		light.ambient[2] -= 0.1f;
+	}
+	if (key == GLFW_KEY_D)
+	{
+		light.diffuse[0] += 0.1f;
+		light.diffuse[1] += 0.1f;
+		light.diffuse[2] += 0.1f;
+	}
+	if (key == GLFW_KEY_C)
+	{
+		light.diffuse[0] -= 0.1f;
+		light.diffuse[1] -= 0.1f;
+		light.diffuse[2] -= 0.1f;
+	}
+	if (key == GLFW_KEY_S)
+	{
+		light.specular[0] += 0.1f;
+		light.specular[1] += 0.1f;
+		light.specular[2] += 0.1f;
+	}
+	if (key == GLFW_KEY_X)
+	{
+		light.specular[0] -= 0.1f;
+		light.specular[1] -= 0.1f;
+		light.specular[2] -= 0.1f;
 	}
 }
 
@@ -161,7 +205,10 @@ int main()
 		glViewport(0, 0, WIDTH, HEIGHT);
 
 		glEnable(GL_DEPTH_TEST);
-
+		light.ambient = glm::vec3(0.2f, 0.2f, 0.2f);
+		light.diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
+		light.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+		light.position = glm::vec3(light_x, light_y, light_z);
 		// Let's check what are maximum parameters counts
 		GLint nrAttributes;
 		glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
@@ -194,12 +241,18 @@ int main()
 			GLint modelLoc = glGetUniformLocation(theProgram.get_programID(), "model");
 			GLint viewLoc = glGetUniformLocation(theProgram.get_programID(), "view");
 			GLint projLoc = glGetUniformLocation(theProgram.get_programID(), "projection");
-			GLint lightPosLoc = glGetUniformLocation(theProgram.get_programID(), "lightPos");
 			GLint viewPosLoc = glGetUniformLocation(theProgram.get_programID(), "viewPos");
 			GLint lightStrLoc = glGetUniformLocation(theProgram.get_programID(), "lightStrength");
+			GLint lightPosLoc = glGetUniformLocation(theProgram.get_programID(), "light.position");
+			GLint lightAmbientLoc = glGetUniformLocation(theProgram.get_programID(), "light.ambient");
+			GLint lightDiffuseLoc = glGetUniformLocation(theProgram.get_programID(), "light.diffuse");
+			GLint lightSpecularLoc = glGetUniformLocation(theProgram.get_programID(), "light.specular");
 			glUniform1f(lightStrLoc, lightStr);
+			glUniform3f(lightAmbientLoc, light.ambient[0], light.ambient[1], light.ambient[2]);
+			glUniform3f(lightDiffuseLoc, light.diffuse[0], light.diffuse[1], light.diffuse[2]); // Let's darken the light a bit to fit the scene
+			glUniform3f(lightSpecularLoc, light.specular[0], light.specular[1], light.specular[2]);
 			glUniform3f(viewPosLoc, camera_closer_x, camera_closer_y, camera_closer_z - 3.0f);
-			glUniform3f(lightPosLoc, light_x, light_y, light_z);
+			glUniform3f(lightPosLoc, light.position[0], light.position[1], light.position[2]);
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 			

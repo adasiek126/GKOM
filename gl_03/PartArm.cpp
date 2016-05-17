@@ -5,7 +5,7 @@ PartArm::PartArm(ShaderProgram* program):Model(program)
 {
 	verticesSize = 6 * 16;
 	indicesSize = 3 * 28;
-	material = MTL_YELLOW_PLASTIC;
+	material = getMaterialStruct(MTL_CHROME);
 	generateVertices();
 	generateCuboid();
 	generateNormals();

@@ -758,6 +758,12 @@ enum
     MTL_SPECULAR,
     MTL_SHININESS
 };
+struct Material{
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+	GLfloat shininess;
+};
 
 //////////////////////////////////////////////////////////////////////
 // pobranie wybranej w³aœciwoœci okreœlonego materia³u
@@ -1043,6 +1049,19 @@ inline const GLfloat *GetMaterial( const int material, const int properties )
     return NULL;
 }
 
+inline const Material& getMaterialStruct(const int material)
+{
+	const GLfloat* ambient = GetMaterial(material, MTL_AMBIENT);
+	const GLfloat* diffuse = GetMaterial(material, MTL_DIFFUSE);
+	const GLfloat* specular = GetMaterial(material, MTL_SPECULAR);
+	const GLfloat* shininess = GetMaterial(material, MTL_SHININESS);
+	Material material_ret;
+	material_ret.ambient = glm::vec3(ambient[0]/ambient[3], ambient[1]/ambient[3], ambient[2]/ambient[3]);
+	material_ret.diffuse = glm::vec3(diffuse[0]/diffuse[3], diffuse[1]/diffuse[3], diffuse[2]/diffuse[3]);
+	material_ret.specular = glm::vec3(specular[0]/specular[3], specular[1]/specular[3], specular[2]/specular[3]);
+	material_ret.shininess = shininess[0];
+	return material_ret;
+}
 //////////////////////////////////////////////////////////////////////
 // pobranie angielskiej nazwy okreœlonego materia³u
 //////////////////////////////////////////////////////////////////////

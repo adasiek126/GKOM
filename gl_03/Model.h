@@ -21,13 +21,15 @@ protected:
 	GLuint VBO;
 	GLuint EBO;
 	GLuint NBO;
+	GLuint diffuseMap;
 	glm::mat4 transformation;
 	virtual void generateVertices() = 0;
 	ShaderProgram* program;
 	Cuboid cuboid;
-	int material;
+	Material material;
 	void generateCuboid();
 	virtual void generateNormals(bool abs = false);
+	bool useTexture;
 public:
 	glm::vec4& getVerticeAfterTransformation(glm::vec4& vertice);
 	void display();

@@ -5,7 +5,7 @@ CylinderModel::CylinderModel(ShaderProgram* program, GLfloat height,GLfloat radi
 {
 	this->radius = radius;
 	this->cylinderHeight = height;
-	material = MTL_CHROME;
+	material = getMaterialStruct(MTL_COPPER);
 	verticesSize = 6 * (CylinderModel::walls * 2 + 2);
 	indicesSize = 3 * 4 * CylinderModel::walls;
 	generateVertices();
@@ -48,7 +48,7 @@ CylinderModel::CylinderModel(ShaderProgram* program, GLfloat height, GLfloat rad
 	this->red = red;
 	this->blue = blue;
 	this->green = green;
-	material = MTL_BLACK_RUBBER;
+	material = getMaterialStruct(MTL_BLACK_RUBBER);
 	verticesSize = 6 * (CylinderModel::walls * 2 + 2);
 	indicesSize = 3 * 4 * CylinderModel::walls;
 	generateVertices();

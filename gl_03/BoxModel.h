@@ -1,4 +1,5 @@
 #pragma once
+#include <SOIL.h>
 #include "Model.h"
 class BoxModel :
 	public Model
@@ -12,8 +13,13 @@ private:
 	GLfloat green = 0.7f;
 	GLfloat blue = 0.3f;
 	glm::vec3 position;
+	GLuint texBO;
+	GLfloat* textureCoords;
+	void loadTexture();
 protected:
 	virtual void generateVertices();
+	void generateNormals(bool abs = false);
+	void generateTextureCoords();
 public:
 	GLfloat getHeight(){ return a; }
 	GLfloat getWidth(){ return b; }

@@ -4,7 +4,7 @@
 Holder::Holder(ShaderProgram* program)
 {
 	arm = new Arm(program);
-	lowerCylinder = new CylinderModel(program,4.0f);
+	lowerCylinder = new CylinderModel(program,4.0f, 0.30f);
 	upperCylinder = new CylinderModel(program,4.0f, 0.35f);
 }
 void Holder::repaint()

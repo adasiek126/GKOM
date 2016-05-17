@@ -3,8 +3,9 @@
 
 Model::Model(ShaderProgram* program)
 {
+	useTexture = GL_FALSE;
 	normalsSize = 0;
-	material = MTL_DEFAULT;
+	material = getMaterialStruct(MTL_DEFAULT);
 	this->program = program;
 }
 
@@ -24,7 +25,29 @@ void Model::display()
 	glBindVertexArray(VAO);
 	GLint modelLoc = glGetUniformLocation(program->get_programID(), "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transformation));
-	glUniform1i(glGetUniformLocation(program->get_programID(), "material"), material);
+	if (!useTexture)
+	{
+		GLint matAmbientLoc = glGetUniformLocation(program->get_programID(), "material.ambient");
+		GLint matDiffuseLoc = glGetUniformLocation(program->get_programID(), "material.diffuse");
+		glUniform3f(matAmbientLoc, material.ambient[0], material.ambient[1], material.ambient[2]);
+		glUniform3f(matDiffuseLoc, material.diffuse[0], material.diffuse[1], material.diffuse[2]);
+	}
+	else
+	{
+		glUniform1i(glGetUniformLocation(program->get_programID(), "material.textureDiffuse"), 0);
+	}
+	GLint matSpecularLoc = glGetUniformLocation(program->get_programID(), "material.specular");
+	GLint matShininessLoc = glGetUniformLocation(program->get_programID(), "material.shininess");
+	GLint useTextureLoc = glGetUniformLocation(program->get_programID(), "textureUse");
+	glUniform3f(matSpecularLoc, material.specular[0],material.specular[1],material.specular[2]);
+	glUniform1f(matShininessLoc, material.shininess);
+	glUniform1i(useTextureLoc, useTexture);
+
+	if (useTexture)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, diffuseMap);
+	}
 	glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
@@ -120,8 +143,8 @@ void Model::generateCuboid()
 }
 void Model::generateNormals(bool abs)
 {
-	normals = new GLfloat[verticesSize/2];
-	memset(normals, 0, sizeof(GLfloat)*(verticesSize/2));
+	normals = new GLfloat[indicesSize];
+	memset(normals, 0, sizeof(GLfloat)*(indicesSize));
 	for (int i = 0; i < indicesSize/3; i++)
 	{
 		glm::vec3 v10; 
@@ -184,7 +207,7 @@ void Model::generateNormals(bool abs)
 			normals[3 * i + 2] = 0.0f;
 		}
 	}
-	normalsSize = verticesSize / 2;
+	normalsSize = indicesSize;
 }
 Model::~Model()
 {
