@@ -11,6 +11,7 @@ struct Material{
 	vec3 ambient;
 	vec3 diffuse;
 	sampler2D textureDiffuse;
+	sampler2D textureSpecular;
 	vec3 specular;
 	float shininess;
 };
@@ -25,6 +26,7 @@ struct Light {
 uniform Light light; 
 uniform Material material;
 uniform bool textureUse;
+uniform bool SpecularTextureUse;
 void main()
 {
 	/*// pobranie wybranego materia³u
@@ -68,8 +70,15 @@ void main()
 		diffuse = light.diffuse * diff * vec3(texture(material.textureDiffuse, TexCoords));
 		ambient = light.ambient * vec3(texture(material.textureDiffuse, TexCoords));
 	}
-		  
-	vec3 specular = light.specular * (spec * material.specular);     
+	vec3 specular;
+	if(SpecularTextureUse)
+	{
+		specular = light.specular * spec * vec3(texture(material.textureSpecular, TexCoords));
+	}	
+	else
+	{
+		specular = light.specular * (spec * material.specular);
+	}       
     vec3 result = ambient + diffuse + specular;
     color = vec4(result, 1.0f);
 }

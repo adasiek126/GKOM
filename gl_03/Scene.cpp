@@ -4,7 +4,7 @@
 Scene::Scene(ShaderProgram* program)
 {
 	holder = new Holder(program);
-	box = new BoxModel(program);
+	box = new BoxModel(program, GL_TEXTURE0, GL_TEXTURE1);
 	belt = new Belt(program);
 	floor = new Floor(program);
 	floor->setPosition(glm::vec3(0.0f, -2.52f, 0.0f));
@@ -92,5 +92,5 @@ Scene::~Scene()
 	delete box;
 	delete holder;
 	delete belt;
-	delete floor;
+	//delete floor;
 }

@@ -26,7 +26,7 @@ public:
 	GLfloat getDepth(){ return c; }
 	glm::vec3& getPosition(){ return position; };
 	void setPosition(glm::vec3& position){ this->position = position; };
-	BoxModel(ShaderProgram* program);
+	BoxModel(ShaderProgram* program, GLuint diffuseTexture, GLuint specularTexture);
 	BoxModel(ShaderProgram* program, GLfloat a, GLfloat b, GLfloat c, GLfloat red, GLfloat green, GLfloat blue);
 	~BoxModel();
 };

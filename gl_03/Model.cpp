@@ -4,6 +4,7 @@
 Model::Model(ShaderProgram* program)
 {
 	useTexture = GL_FALSE;
+	useSpecularTexture = GL_FALSE;
 	normalsSize = 0;
 	material = getMaterialStruct(MTL_DEFAULT);
 	this->program = program;
@@ -35,18 +36,26 @@ void Model::display()
 	else
 	{
 		glUniform1i(glGetUniformLocation(program->get_programID(), "material.textureDiffuse"), 0);
+		if (useSpecularTexture)
+		{
+			glUniform1i(glGetUniformLocation(program->get_programID(), "material.textureSpecular"), 1);
+		}
 	}
 	GLint matSpecularLoc = glGetUniformLocation(program->get_programID(), "material.specular");
 	GLint matShininessLoc = glGetUniformLocation(program->get_programID(), "material.shininess");
 	GLint useTextureLoc = glGetUniformLocation(program->get_programID(), "textureUse");
+	GLint useSpecularTextureLoc = glGetUniformLocation(program->get_programID(), "SpecularTextureUse");
 	glUniform3f(matSpecularLoc, material.specular[0],material.specular[1],material.specular[2]);
 	glUniform1f(matShininessLoc, material.shininess);
 	glUniform1i(useTextureLoc, useTexture);
+	glUniform1i(useSpecularTextureLoc, useSpecularTexture);
 
 	if (useTexture)
 	{
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(diffuseTexture);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
+		glActiveTexture(specularTexture);
+		glBindTexture(GL_TEXTURE_2D, specularMap);
 	}
 	glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
@@ -83,6 +92,9 @@ void Model::generateCuboid()
 	GLfloat minY=vertices[1];
 	GLfloat maxZ=vertices[2];
 	GLfloat minZ=vertices[2];
+	int size = verticesSize;
+	if (useTexture == GL_TRUE)
+		size = size / 2;
 	for (int i = 0; i < verticesSize; i += 6)
 	{
 		if (vertices[i]>maxX)
@@ -143,8 +155,19 @@ void Model::generateCuboid()
 }
 void Model::generateNormals(bool abs)
 {
-	normals = new GLfloat[indicesSize];
-	memset(normals, 0, sizeof(GLfloat)*(indicesSize));
+	
+	if (useTexture == GL_FALSE)
+	{
+		normals = new GLfloat[indicesSize];
+		memset(normals, 0, sizeof(GLfloat)*(indicesSize));
+		normalsSize = indicesSize;
+	}
+	else
+	{
+		normals = new GLfloat[2*indicesSize];
+		normalsSize = 2 * indicesSize;
+		memset(normals, 0, sizeof(GLfloat)*(2*indicesSize));
+	}
 	for (int i = 0; i < indicesSize/3; i++)
 	{
 		glm::vec3 v10; 
@@ -207,9 +230,8 @@ void Model::generateNormals(bool abs)
 			normals[3 * i + 2] = 0.0f;
 		}
 	}
-	normalsSize = indicesSize;
 }
 Model::~Model()
 {
-	//delete[] normals;
+	delete[] normals;
 }

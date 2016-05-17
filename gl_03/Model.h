@@ -22,6 +22,7 @@ protected:
 	GLuint EBO;
 	GLuint NBO;
 	GLuint diffuseMap;
+	GLuint specularMap;
 	glm::mat4 transformation;
 	virtual void generateVertices() = 0;
 	ShaderProgram* program;
@@ -30,6 +31,9 @@ protected:
 	void generateCuboid();
 	virtual void generateNormals(bool abs = false);
 	bool useTexture;
+	bool useSpecularTexture;
+	GLuint diffuseTexture;
+	GLuint specularTexture;
 public:
 	glm::vec4& getVerticeAfterTransformation(glm::vec4& vertice);
 	void display();
