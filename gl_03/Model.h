@@ -8,6 +8,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Cuboid.h"
 #include "materials.h"
+#include <SOIL.h>
 class Model
 {
 protected:
@@ -17,10 +18,12 @@ protected:
 	GLfloat* vertices;
 	GLfloat* normals;
 	GLuint* indices;
+	GLfloat* textureCoords;
 	GLuint VAO;
 	GLuint VBO;
 	GLuint EBO;
 	GLuint NBO;
+	GLuint texBO;
 	GLuint diffuseMap;
 	GLuint specularMap;
 	glm::mat4 transformation;
@@ -34,10 +37,15 @@ protected:
 	bool useSpecularTexture;
 	GLuint diffuseTexture;
 	GLuint specularTexture;
+	std::string diffuseTextureFileName;
+	std::string specularTextureFileName;
 public:
 	glm::vec4& getVerticeAfterTransformation(glm::vec4& vertice);
+	void setDiffuseTextureFilename(std::string name){ diffuseTextureFileName = name; }
+	void setSpecularTextureFilename(std::string name){ specularTextureFileName = name; }
 	void display();
 	void setTransformation(glm::mat4& transformation);
+	void loadTexture();
 	glm::mat4& getTransfloramtion(){ return transformation; };
 	GLfloat* getVertices();
 	GLfloat* getNormals(){ return normals; }

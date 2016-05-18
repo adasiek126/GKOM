@@ -13,9 +13,6 @@ private:
 	GLfloat green = 0.7f;
 	GLfloat blue = 0.3f;
 	glm::vec3 position;
-	GLuint texBO;
-	GLfloat* textureCoords;
-	void loadTexture();
 protected:
 	virtual void generateVertices();
 	void generateNormals(bool abs = false);

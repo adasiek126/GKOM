@@ -35,7 +35,14 @@ void Model::display()
 	}
 	else
 	{
-		glUniform1i(glGetUniformLocation(program->get_programID(), "material.textureDiffuse"), 0);
+		GLint textureId;
+		if (this->diffuseTexture == GL_TEXTURE0)
+			textureId = 0;
+		else if (this->diffuseTexture == GL_TEXTURE1)
+			textureId = 1;
+		else
+			textureId = 2;
+		glUniform1i(glGetUniformLocation(program->get_programID(), "material.textureDiffuse"), textureId);
 		if (useSpecularTexture)
 		{
 			glUniform1i(glGetUniformLocation(program->get_programID(), "material.textureSpecular"), 1);
@@ -54,8 +61,11 @@ void Model::display()
 	{
 		glActiveTexture(diffuseTexture);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
-		glActiveTexture(specularTexture);
-		glBindTexture(GL_TEXTURE_2D, specularMap);
+		if (useSpecularTexture)
+		{
+			glActiveTexture(specularTexture);
+			glBindTexture(GL_TEXTURE_2D, specularMap);
+		}
 	}
 	glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
@@ -229,6 +239,37 @@ void Model::generateNormals(bool abs)
 			normals[3 * i + 1] = 0.0f;
 			normals[3 * i + 2] = 0.0f;
 		}
+	}
+}
+void Model::loadTexture()
+{
+	glGenTextures(1, &diffuseMap);
+	int width, height;
+	unsigned char* image;
+	// Diffuse map
+	image = SOIL_load_image(diffuseTextureFileName.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	glBindTexture(GL_TEXTURE_2D, diffuseMap);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	SOIL_free_image_data(image);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	if (useSpecularTexture)
+	{
+		glGenTextures(1, &specularMap);
+		image = SOIL_load_image(specularTextureFileName.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+		glBindTexture(GL_TEXTURE_2D, specularMap);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		SOIL_free_image_data(image);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }
 Model::~Model()

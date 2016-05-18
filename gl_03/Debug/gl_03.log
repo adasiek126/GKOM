@@ -1,52 +1,14 @@
-﻿Build started 2016-05-17 22:55:45.
+﻿Build started 2016-05-18 18:18:17.
      1>Project "C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\gl_03\gl_03.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Arm.cpp Belt.cpp BoxModel.cpp CylinderModel.cpp Floor.cpp Holder.cpp Model.cpp PartArm.cpp Scene.cpp gl_03.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Model.cpp Scene.cpp
          Scene.cpp
      1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
          Model.cpp
      1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>Model.cpp(98): warning C4018: '<' : signed/unsigned mismatch
-     1>Model.cpp(171): warning C4018: '<' : signed/unsigned mismatch
-     1>Model.cpp(216): warning C4018: '<' : signed/unsigned mismatch
-         BoxModel.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>BoxModel.cpp(146): warning C4244: 'initializing' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>BoxModel.cpp(166): warning C4018: '<' : signed/unsigned mismatch
-     1>BoxModel.cpp(184): warning C4244: 'initializing' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>BoxModel.cpp(200): warning C4018: '<' : signed/unsigned mismatch
-     1>BoxModel.cpp(203): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         Compiling...
-         gl_03.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>gl_03.cpp(95): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
-     1>gl_03.cpp(100): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
-     1>gl_03.cpp(105): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
-     1>gl_03.cpp(110): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
-         PartArm.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>PartArm.cpp(111): warning C4244: 'return' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>PartArm.cpp(121): warning C4018: '<' : signed/unsigned mismatch
-     1>PartArm.cpp(159): warning C4018: '<' : signed/unsigned mismatch
-         Holder.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-         Floor.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>Floor.cpp(57): warning C4018: '<' : signed/unsigned mismatch
-     1>Floor.cpp(61): warning C4018: '<' : signed/unsigned mismatch
-         CylinderModel.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-         Belt.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>Belt.cpp(83): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(103): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(126): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(160): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(236): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(297): warning C4018: '<' : signed/unsigned mismatch
-         Arm.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
+     1>Model.cpp(108): warning C4018: '<' : signed/unsigned mismatch
+     1>Model.cpp(181): warning C4018: '<' : signed/unsigned mismatch
+     1>Model.cpp(226): warning C4018: '<' : signed/unsigned mismatch
          Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.exe" /INCREMENTAL /NOLOGO opengl32.lib glfw3.lib glew32s.lib soil.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.lib" /MACHINE:X86 Debug\Arm.obj
@@ -101,13 +63,13 @@
      1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
      1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
      1>Floor.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
-     1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewGenerateMipmap imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewActiveTexture imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewUniform1f imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewUniform1i imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewUniform3f imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewUniformMatrix4fv imported
+     1>Model.obj : warning LNK4049: locally defined symbol ___glewGenerateMipmap imported
      1>shprogram.obj : warning LNK4049: locally defined symbol ___glewAttachShader imported
      1>shprogram.obj : warning LNK4049: locally defined symbol ___glewCompileShader imported
      1>shprogram.obj : warning LNK4049: locally defined symbol ___glewCreateProgram imported
@@ -124,4 +86,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:07.77
+Time Elapsed 00:00:02.94

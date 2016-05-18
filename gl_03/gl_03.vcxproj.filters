@@ -48,7 +48,7 @@
     <ClCompile Include="Belt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Floor.cpp">
+    <ClCompile Include="Plane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,10 +93,10 @@
     <ClInclude Include="Belt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Floor.h">
+    <ClInclude Include="materials.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="materials.h">
+    <ClInclude Include="Plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

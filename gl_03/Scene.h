@@ -2,14 +2,14 @@
 #include "Holder.h"
 #include "BoxModel.h"
 #include "Belt.h"
-#include "Floor.h"
+#include "Plane.h"
 class Scene
 {
 private:
 	BoxModel* box;
 	Holder* holder;
 	Belt* belt;
-	Floor* floor;
+	Plane* floor;
 	bool checkInteractionWithArm();
 	bool checkInteractionWithBelt();
 	void generateBoxPosition();

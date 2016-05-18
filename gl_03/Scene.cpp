@@ -5,8 +5,13 @@ Scene::Scene(ShaderProgram* program)
 {
 	holder = new Holder(program);
 	box = new BoxModel(program, GL_TEXTURE0, GL_TEXTURE1);
+	box->setDiffuseTextureFilename("box.png");
+	box->setSpecularTextureFilename("box_specular.png");
+	box->loadTexture();
 	belt = new Belt(program);
-	floor = new Floor(program);
+	floor = new Plane(program,true,false,GL_TEXTURE2,NULL);
+	floor->setDiffuseTextureFilename("beton.png");
+	floor->loadTexture();
 	floor->setPosition(glm::vec3(0.0f, -2.52f, 0.0f));
 	glm::mat4 model;
 	box->setPosition(boxInitPosition);

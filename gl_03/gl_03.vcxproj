@@ -88,7 +88,7 @@
     <ClCompile Include="BoxModel.cpp" />
     <ClCompile Include="Cuboid.cpp" />
     <ClCompile Include="CylinderModel.cpp" />
-    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="gl_03.cpp" />
     <ClCompile Include="Holder.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -112,7 +112,7 @@
     <ClInclude Include="BoxModel.h" />
     <ClInclude Include="Cuboid.h" />
     <ClInclude Include="CylinderModel.h" />
-    <ClInclude Include="Floor.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Holder.h" />
     <ClInclude Include="materials.h" />
     <ClInclude Include="Model.h" />
