@@ -283,5 +283,5 @@ void Model::loadTexture()
 }
 Model::~Model()
 {
-	delete[] normals;
+	
 }

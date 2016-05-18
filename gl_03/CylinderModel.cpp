@@ -192,4 +192,5 @@ CylinderModel::~CylinderModel()
 {
 	delete[] vertices;
 	delete[] indices;
+	delete[] normals;
 }

@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="gl_03.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="shprogram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -51,16 +48,13 @@
     <ClCompile Include="Plane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GKOM-projekt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="gl_03.frag" />
-    <None Include="gl_03.vert" />
-    <None Include="materials.glsl" />
-    <None Include="materials_static.glsl" />
-    <None Include="blinn_phong_light.glsl" />
-    <None Include="lambert_light.glsl" />
-    <None Include="light_model.glsl" />
-    <None Include="light_model_static.glsl" />
+    <None Include="projekt.frag" />
+    <None Include="projekt.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shprogram.h">

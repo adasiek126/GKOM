@@ -264,4 +264,6 @@ BoxModel::~BoxModel()
 {
 	delete[] vertices;
 	delete[] indices;
+	delete[] normals;
+	delete[] textureCoords;
 }

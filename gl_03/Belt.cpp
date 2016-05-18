@@ -323,6 +323,7 @@ Belt::~Belt()
 {
 	delete[] vertices;
 	delete[] indices;
+	delete[] normals;
 	delete cylinderLeft;
 	delete cylinderRight;
 	delete frontSupport;

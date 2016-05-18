@@ -179,4 +179,5 @@ PartArm::~PartArm()
 {
 	delete[] vertices;
 	delete[] indices;
+	delete[] normals;
 }

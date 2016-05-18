@@ -136,5 +136,10 @@ Scene::~Scene()
 	delete box;
 	delete holder;
 	delete belt;
-	//delete floor;
+	delete backWall;
+	delete leftWall;
+	delete rightWall;
+	delete frontWall;
+	delete ceiling;
+	delete floor;
 }

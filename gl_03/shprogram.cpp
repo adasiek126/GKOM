@@ -38,7 +38,7 @@ GLuint compile_shader(const GLchar* shaderCode, GLenum shaderType)
 	return shader_id;
 }
 
-ShaderProgram::ShaderProgram(const GLchar* vertexPath, const GLchar* fragmentPath, const GLchar* fragmentPath2)
+ShaderProgram::ShaderProgram(const GLchar* vertexPath, const GLchar* fragmentPath)
 {
 	// prepare vertex and fragment shaders
 	string vertex_code = read_shader_code(vertexPath);
@@ -47,14 +47,10 @@ ShaderProgram::ShaderProgram(const GLchar* vertexPath, const GLchar* fragmentPat
 	string fragment_code = read_shader_code(fragmentPath);
 	GLuint fragment_id = compile_shader(fragment_code.c_str(), GL_FRAGMENT_SHADER);
 
-	string fragment2_code = read_shader_code(fragmentPath2);
-	GLuint fragment2_id = compile_shader(fragment2_code.c_str(), GL_FRAGMENT_SHADER);
-
 	// link shader program
 	program_id = glCreateProgram();
 	glAttachShader(program_id, vertex_id);
 	glAttachShader(program_id, fragment_id);
-	glAttachShader(program_id, fragment2_id);
 	glLinkProgram(program_id);
 
 	// Print linking errors if any

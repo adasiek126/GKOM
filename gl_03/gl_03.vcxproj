@@ -14,6 +14,7 @@
     <ProjectGuid>{A85D9986-9B0F-4401-A405-55CC87832955}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>gl_03</RootNamespace>
+    <ProjectName>GKOM-Projekt</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -89,7 +90,7 @@
     <ClCompile Include="Cuboid.cpp" />
     <ClCompile Include="CylinderModel.cpp" />
     <ClCompile Include="Plane.cpp" />
-    <ClCompile Include="gl_03.cpp" />
+    <ClCompile Include="GKOM-projekt.cpp" />
     <ClCompile Include="Holder.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="PartArm.cpp" />
@@ -97,14 +98,8 @@
     <ClCompile Include="shprogram.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="blinn_phong_light.glsl" />
-    <None Include="gl_03.frag" />
-    <None Include="gl_03.vert" />
-    <None Include="lambert_light.glsl" />
-    <None Include="light_model.glsl" />
-    <None Include="light_model_static.glsl" />
-    <None Include="materials.glsl" />
-    <None Include="materials_static.glsl" />
+    <None Include="projekt.frag" />
+    <None Include="projekt.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arm.h" />
