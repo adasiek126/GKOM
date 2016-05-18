@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Include", "Include", "{44FD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{BFED2AB6-2C7D-40B6-9DC6-3B904D142C1C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GKOM-Projekt", "gl_03\gl_03.vcxproj", "{A85D9986-9B0F-4401-A405-55CC87832955}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GKOM-Projekt", "GKOM-Projekt\GKOM-Projekt.vcxproj", "{A85D9986-9B0F-4401-A405-55CC87832955}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
