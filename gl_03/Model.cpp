@@ -40,12 +40,21 @@ void Model::display()
 			textureId = 0;
 		else if (this->diffuseTexture == GL_TEXTURE1)
 			textureId = 1;
-		else
+		else if (this->diffuseTexture == GL_TEXTURE2)
 			textureId = 2;
+		else if (this->diffuseTexture == GL_TEXTURE3)
+			textureId = 3;
+		else
+			textureId = 4;
 		glUniform1i(glGetUniformLocation(program->get_programID(), "material.textureDiffuse"), textureId);
 		if (useSpecularTexture)
 		{
-			glUniform1i(glGetUniformLocation(program->get_programID(), "material.textureSpecular"), 1);
+			GLuint specularTextureId;
+			if (this->specularTexture == GL_TEXTURE1)
+				specularTextureId = 1;
+			else
+				specularTextureId = 5;
+			glUniform1i(glGetUniformLocation(program->get_programID(), "material.textureSpecular"), specularTextureId);
 		}
 	}
 	GLint matSpecularLoc = glGetUniformLocation(program->get_programID(), "material.specular");

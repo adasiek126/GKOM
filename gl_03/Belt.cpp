@@ -8,8 +8,14 @@ Belt::Belt(ShaderProgram* program) :Model(program)
 	material = getMaterialStruct(MTL_CYAN_RUBBER);
 	cylinderLeft = new CylinderModel(program, depth + 0.5f, height / 2 - 0.01f*(height/2), 0.0f, 0.0f, 0.0f);
 	cylinderRight = new CylinderModel(program, depth + 0.5f, height / 2 - 0.01f*(height / 2), 0.0f, 0.0f, 0.0f);
-	frontSupport = new BoxModel(program, 2.0f*(centerY + 2.5f), 2.05f*width, 0.25f,0.3f,0.3f,0.2f);
-	backSupport = new BoxModel(program, 2.0f*(centerY + 2.5f), 2.05f*width, 0.25f, 0.3f, 0.3f, 0.2f);
+	frontSupport = new BoxModel(program, 2.0f*(centerY + 2.5f), 2.05f*width, 0.25f,0.3f,0.3f,0.2f,true,true,GL_TEXTURE4,GL_TEXTURE5);
+	frontSupport->setDiffuseTextureFilename("metal.png");
+	frontSupport->setSpecularTextureFilename("metal_specular.png");
+	frontSupport->loadTexture();
+	backSupport = new BoxModel(program, 2.0f*(centerY + 2.5f), 2.05f*width, 0.25f, 0.3f, 0.3f, 0.2f,true,true, GL_TEXTURE4, GL_TEXTURE5);
+	backSupport->setDiffuseTextureFilename("metal.png");
+	backSupport->setSpecularTextureFilename("metal_specular.png");
+	backSupport->loadTexture();
 	generateVertices();
 	generateCuboid();
 	generateNormals();

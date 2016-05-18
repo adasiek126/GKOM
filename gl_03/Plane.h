@@ -18,7 +18,7 @@ public:
 	void setPosition(glm::vec3& pos){ position = pos; }
 	glm::vec3& getPosition(){ return position; }
 	void repaint();
-	Plane(ShaderProgram* program, bool useTexture, bool useSpecularTexture, GLuint diffuseTexture, GLuint specularTexture);
+	Plane(ShaderProgram* program, bool useTexture, bool useSpecularTexture, GLuint diffuseTexture, GLuint specularTexture, glm::vec2 size=glm::vec2(20.0f,20.0f));
 	~Plane();
 };
 

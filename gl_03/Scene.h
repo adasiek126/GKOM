@@ -10,6 +10,11 @@ private:
 	Holder* holder;
 	Belt* belt;
 	Plane* floor;
+	Plane* backWall;
+	Plane* leftWall;
+	Plane* rightWall;
+	Plane* frontWall;
+	Plane* ceiling;
 	bool checkInteractionWithArm();
 	bool checkInteractionWithBelt();
 	void generateBoxPosition();

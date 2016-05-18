@@ -1,8 +1,10 @@
 #include "Plane.h"
 
 
-Plane::Plane(ShaderProgram* program, bool useTexture, bool useSpecularTexture, GLuint diffuseTexture, GLuint specularTexture) :Model(program)
+Plane::Plane(ShaderProgram* program, bool useTexture, bool useSpecularTexture, GLuint diffuseTexture, GLuint specularTexture, glm::vec2 size) :Model(program)
 {
+	this->width = size[0];
+	this->depth = size[1];
 	this->verticesSize = 6 * 4;
 	this->indicesSize = 3*2;
 	this->useTexture = useTexture;
@@ -10,6 +12,7 @@ Plane::Plane(ShaderProgram* program, bool useTexture, bool useSpecularTexture, G
 	this->diffuseTexture = diffuseTexture;
 	this->specularTexture = specularTexture;
 	material = getMaterialStruct(MTL_YELLOW_RUBBER);
+	material.specular = glm::vec3(0.0f, 0.0f, 0.0f);
 	generateVertices();
 	generateCuboid();
 	generateNormals();

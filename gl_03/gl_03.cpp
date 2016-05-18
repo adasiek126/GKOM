@@ -10,17 +10,17 @@
 using namespace std;
 
 const GLuint WIDTH = 800, HEIGHT = 600;
-GLfloat camera_x = 0.0f;
+GLfloat camera_x = 20.0f;
 GLfloat camera_y = 0.0f;
 GLfloat camera_closer_x = -1.0f;
 GLfloat camera_closer_y = 0.0f;
-GLfloat camera_closer_z = -2.0f;
+GLfloat camera_closer_z = -7.0f;
 GLfloat arms_angle = 0.0f;
 GLfloat lowerCylinderMove = 0.0f;
 GLfloat arm_x = 0.0f;
 GLfloat arm_z = 0.0f;
 GLfloat lightStr = 1.0f;
-GLfloat light_x = 0.0f;
+GLfloat light_x = -1.0f;
 GLfloat light_y = -10.0f;
 GLfloat light_z = 5.0f;
 Scene* scene;
@@ -205,8 +205,8 @@ int main()
 		glViewport(0, 0, WIDTH, HEIGHT);
 
 		glEnable(GL_DEPTH_TEST);
-		light.ambient = glm::vec3(0.2f, 0.2f, 0.2f);
-		light.diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
+		light.ambient = glm::vec3(0.5f, 0.5f, 0.5f);
+		light.diffuse = glm::vec3(0.7f, 0.7f, 0.7f);
 		light.specular = glm::vec3(1.0f, 1.0f, 1.0f);
 		light.position = glm::vec3(light_x, light_y, light_z);
 		// Let's check what are maximum parameters counts

@@ -70,11 +70,18 @@ BoxModel::BoxModel(ShaderProgram* program, GLuint diffuseTexture, GLuint specula
 
 	glBindVertexArray(0);
 }
-BoxModel::BoxModel(ShaderProgram* program, GLfloat a, GLfloat b, GLfloat c, GLfloat red, GLfloat green, GLfloat blue) :Model(program)
+BoxModel::BoxModel(ShaderProgram* program, GLfloat a, GLfloat b, GLfloat c, GLfloat red, GLfloat green, GLfloat blue, bool useTexture, bool useSpecularTexture, GLuint diffuseTexture, GLuint specularTexture) :Model(program)
 {
-	verticesSize = 6 * 8;
 	indicesSize = 12 * 3;
 	material = getMaterialStruct(MTL_POLISHED_COPPER);
+	this->useTexture = useTexture;
+	this->useSpecularTexture = useSpecularTexture;
+	this->diffuseTexture = diffuseTexture;
+	this->specularTexture = specularTexture;
+	if (useTexture == GL_TRUE)
+		verticesSize = 2 * 6 * 8;
+	else
+		verticesSize = 6 * 8;
 	this->a = a;
 	this->b = b;
 	this->c = c;
@@ -88,26 +95,40 @@ BoxModel::BoxModel(ShaderProgram* program, GLfloat a, GLfloat b, GLfloat c, GLfl
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
 	glGenBuffers(1, &NBO);
-	
+	if (useTexture == GL_TRUE)
+	{
+		generateTextureCoords();
+		glGenBuffers(1, &texBO);
+	}
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, verticesSize*sizeof(GLfloat), vertices, GL_STATIC_DRAW);
 	// vertex geometry data
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	if (useTexture == GL_FALSE)
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize*sizeof(indices), indices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, NBO);
 	glBufferData(GL_ARRAY_BUFFER, normalsSize*sizeof(GLfloat), normals, GL_STATIC_DRAW);
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-	
+	if (useTexture == GL_TRUE)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, texBO);
+		glBufferData(GL_ARRAY_BUFFER, 32 * sizeof(GLfloat), textureCoords, GL_STATIC_DRAW);
+		glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+		//texture
+		glEnableVertexAttribArray(3);
+	}
+	else
+	{
+		// vertex color data
+
+		glEnableVertexAttribArray(1);
+	}
 	glEnableVertexAttribArray(0);
-
-	// vertex color data
-
-	glEnableVertexAttribArray(1);
 
 	//normals
 	glEnableVertexAttribArray(2);

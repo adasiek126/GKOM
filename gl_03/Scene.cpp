@@ -13,9 +13,25 @@ Scene::Scene(ShaderProgram* program)
 	floor->setDiffuseTextureFilename("beton.png");
 	floor->loadTexture();
 	floor->setPosition(glm::vec3(0.0f, -2.52f, 0.0f));
+	backWall = new Plane(program, true, false, GL_TEXTURE3, NULL, glm::vec2(20.0f, 12.0f));
+	backWall->setDiffuseTextureFilename("brick.png");
+	backWall->loadTexture();
+	frontWall = new Plane(program, true, false, GL_TEXTURE3, NULL, glm::vec2(20.0f, 12.0f));
+	frontWall->setDiffuseTextureFilename("brick.png");
+	frontWall->loadTexture();
 	glm::mat4 model;
 	box->setPosition(boxInitPosition);
 	box->setTransformation(glm::translate(model, boxInitPosition));
+	leftWall = new Plane(program, true, false, GL_TEXTURE3, NULL, glm::vec2(20.0f, 12.0f));
+	leftWall->setDiffuseTextureFilename("brick.png");
+	leftWall->loadTexture();
+	rightWall = new Plane(program, true, false, GL_TEXTURE3, NULL, glm::vec2(20.0f, 12.0f));
+	rightWall->setDiffuseTextureFilename("brick.png");
+	rightWall->loadTexture();
+	ceiling = new Plane(program, true, false, GL_TEXTURE2, NULL);
+	ceiling->setDiffuseTextureFilename("beton.png");
+	ceiling->loadTexture();
+	ceiling->setPosition(glm::vec3(0.0f, 4.7f, 0.0f));
 }
 void Scene::repaint()
 {
@@ -24,6 +40,29 @@ void Scene::repaint()
 	holder->repaint();
 	belt->repaint();
 	floor->repaint();
+	ceiling->repaint();
+	glm::mat4 model;
+	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+	model = glm::translate(model, glm::vec3(0.0f,10.0f , -1.26f));
+	backWall->setTransformation(model);
+	backWall->display();
+	model = glm::mat4();
+	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::translate(model, glm::vec3(0.0f, 10.0f, -1.26f));
+	frontWall->setTransformation(model);
+	frontWall->display();
+	model = glm::mat4();
+	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	model = glm::translate(model, glm::vec3(0.0f, -10.0f, -1.26f));
+	leftWall->setTransformation(model);
+	leftWall->display();
+	model = glm::mat4();
+	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+	model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	model = glm::translate(model, glm::vec3(0.0f, 10.0f, -1.26f));
+	rightWall->setTransformation(model);
+	rightWall->display();
 }
 bool Scene::checkInteractionWithArm()
 {

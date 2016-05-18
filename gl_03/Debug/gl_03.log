@@ -1,22 +1,20 @@
-﻿Build started 2016-05-18 18:18:17.
+﻿Build started 2016-05-18 19:59:40.
      1>Project "C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\gl_03\gl_03.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Model.cpp Scene.cpp
-         Scene.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt gl_03.cpp
+         gl_03.cpp
      1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-         Model.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gl_03\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>Model.cpp(108): warning C4018: '<' : signed/unsigned mismatch
-     1>Model.cpp(181): warning C4018: '<' : signed/unsigned mismatch
-     1>Model.cpp(226): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
+     1>gl_03.cpp(95): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
+     1>gl_03.cpp(100): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
+     1>gl_03.cpp(105): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
+     1>gl_03.cpp(110): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.exe" /INCREMENTAL /NOLOGO opengl32.lib glfw3.lib glew32s.lib soil.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\gl_03.lib" /MACHINE:X86 Debug\Arm.obj
          Debug\Belt.obj
          Debug\BoxModel.obj
          Debug\Cuboid.obj
          Debug\CylinderModel.obj
-         Debug\Floor.obj
+         Debug\Plane.obj
          Debug\gl_03.obj
          Debug\Holder.obj
          Debug\Model.obj
@@ -31,38 +29,38 @@
      1>Belt.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
      1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
      1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
-     1>Floor.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
+     1>Plane.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
      1>PartArm.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
      1>Belt.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
      1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
      1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
-     1>Floor.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
+     1>Plane.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
      1>PartArm.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
      1>Belt.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
      1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
      1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
-     1>Floor.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
+     1>Plane.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
      1>PartArm.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
      1>Belt.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
      1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
      1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
-     1>Floor.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
+     1>Plane.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
      1>PartArm.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
      1>Belt.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
      1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
      1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
-     1>Floor.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
+     1>Plane.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
      1>PartArm.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
      1>Belt.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
      1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
      1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
-     1>Floor.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
+     1>Plane.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
      1>PartArm.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
      1>Belt.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
      1>BoxModel.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
      1>CylinderModel.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
-     1>Floor.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
+     1>Plane.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewActiveTexture imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
      1>Model.obj : warning LNK4049: locally defined symbol ___glewUniform1f imported
@@ -86,4 +84,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.94
+Time Elapsed 00:00:02.04

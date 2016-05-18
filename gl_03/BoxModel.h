@@ -24,7 +24,7 @@ public:
 	glm::vec3& getPosition(){ return position; };
 	void setPosition(glm::vec3& position){ this->position = position; };
 	BoxModel(ShaderProgram* program, GLuint diffuseTexture, GLuint specularTexture);
-	BoxModel(ShaderProgram* program, GLfloat a, GLfloat b, GLfloat c, GLfloat red, GLfloat green, GLfloat blue);
+	BoxModel(ShaderProgram* program, GLfloat a, GLfloat b, GLfloat c, GLfloat red, GLfloat green, GLfloat blue, bool useTexture=false, bool useSpecularTexture=false,GLuint diffuseTexture=NULL, GLuint specularTexture=NULL);
 	~BoxModel();
 };
 
