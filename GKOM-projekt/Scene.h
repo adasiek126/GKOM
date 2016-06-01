@@ -23,7 +23,10 @@ private:
 public:
 	Holder* getHolder(){ return holder; };
 	BoxModel* getBox(){ return box; };
+	Belt* getBelt(){ return belt; }
 	void repaint();
+	void setAcceleration(GLfloat acc){ acceleration = acc; }
+	GLfloat getAcceleration(){ return acceleration; }
 	Scene(ShaderProgram* program);
 	~Scene();
 };

@@ -29,6 +29,8 @@ protected:
 public:
 	bool isOn(){ return on; }
 	GLfloat getSpeed(){ return speed; }
+	void setSpeed(GLfloat speed){ this->speed = speed; }
+	void setOn(bool on){ this->on = on; }
 	void setPosition(glm::vec3& pos){ position = pos; }
 	glm::vec3& getPosition(){ return position; }
 	void repaint();

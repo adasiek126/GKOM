@@ -1,56 +1,14 @@
-﻿Build started 2016-05-18 21:25:06.
+﻿Build started 2016-06-01 20:42:15.
      1>Project "C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\GKOM-Projekt\GKOM-Projekt.vcxproj" on node 2 (Build target(s)).
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (gl_03.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Arm.cpp Belt.cpp BoxModel.cpp Cuboid.cpp CylinderModel.cpp Plane.cpp "GKOM-projekt.cpp" Holder.cpp Model.cpp PartArm.cpp Scene.cpp shprogram.cpp
-         shprogram.cpp
-         Scene.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
-         PartArm.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>PartArm.cpp(111): warning C4244: 'return' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>PartArm.cpp(121): warning C4018: '<' : signed/unsigned mismatch
-     1>PartArm.cpp(159): warning C4018: '<' : signed/unsigned mismatch
-         Model.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>Model.cpp(117): warning C4018: '<' : signed/unsigned mismatch
-     1>Model.cpp(190): warning C4018: '<' : signed/unsigned mismatch
-     1>Model.cpp(235): warning C4018: '<' : signed/unsigned mismatch
-         Holder.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "GKOM-projekt.cpp"
          GKOM-projekt.cpp
      1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>GKOM-projekt.cpp(95): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
-     1>GKOM-projekt.cpp(100): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
-     1>GKOM-projekt.cpp(105): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
-     1>GKOM-projekt.cpp(110): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
-         Plane.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>Plane.cpp(81): warning C4018: '<' : signed/unsigned mismatch
-     1>Plane.cpp(85): warning C4018: '<' : signed/unsigned mismatch
-     1>Plane.cpp(115): warning C4018: '<' : signed/unsigned mismatch
-     1>Plane.cpp(160): warning C4018: '<' : signed/unsigned mismatch
-         CylinderModel.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
-         Cuboid.cpp
-         BoxModel.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>BoxModel.cpp(166): warning C4244: 'initializing' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>BoxModel.cpp(186): warning C4018: '<' : signed/unsigned mismatch
-     1>BoxModel.cpp(204): warning C4244: 'initializing' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>BoxModel.cpp(220): warning C4018: '<' : signed/unsigned mismatch
-     1>BoxModel.cpp(223): warning C4018: '<' : signed/unsigned mismatch
-         Belt.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
-     1>Belt.cpp(89): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(109): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(132): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(166): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(242): warning C4018: '<' : signed/unsigned mismatch
-     1>Belt.cpp(303): warning C4018: '<' : signed/unsigned mismatch
-         Arm.cpp
-     1>c:\users\mateusz\downloads\gkom-opengl\gkom-gl\gkom-projekt\materials.h(1063): warning C4172: returning address of local variable or temporary
-         Generating Code...
+     1>GKOM-projekt.cpp(98): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
+     1>GKOM-projekt.cpp(103): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
+     1>GKOM-projekt.cpp(108): warning C4305: '+=' : truncation from 'double' to 'GLfloat'
+     1>GKOM-projekt.cpp(113): warning C4305: '-=' : truncation from 'double' to 'GLfloat'
+     1>GKOM-projekt.cpp(289): warning C4800: 'GLboolean' : forcing value to bool 'true' or 'false' (performance warning)
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\GKOM-Projekt.exe" /INCREMENTAL /NOLOGO opengl32.lib glfw3.lib glew32s.lib soil.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcmt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\GKOM-Projekt.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Mateusz\Downloads\gkom-opengl\gkom-gl\Debug\GKOM-Projekt.lib" /MACHINE:X86 Debug\Arm.obj
          Debug\Belt.obj
@@ -127,4 +85,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:09.98
+Time Elapsed 00:00:02.05

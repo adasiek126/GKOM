@@ -1,0 +1,64 @@
+*******************Ogólne*******************************
+
+Klawisz		Dzia³anie
+--------------------------------------------------------
+ESC		Wy³¹czenie
+--------------------------------------------------------
+******************Oœwietlenie***************************
+
+Klawisz		Dzia³anie
+--------------------------------------------------------
+1		Przesuniêcie œwiat³a w prawo
+2		Przesuniêcie œwiat³a w lewo
+3		Przesuniêcie œwiat³a do góry
+4		Przesuniêcie œwiat³a w dó³
+5		Przesuniêcie œwiat³a do obserwatora
+6		Przesuniêcie œwiat³a od obserwatora
+A		Zwiêkszenie jasnoœci sk³adowej ambient
+Z		Zmniejszenie jasnoœci sk³adowej ambient
+D		Zwiêkszenie janoœci sk³adowej diffuse
+C		Zmniejszenie jasnoœci sk³adowej diffuse
+S		Zwiêkszenie jasnoœci sk³adowej specular
+X		Zmniejszenie jasnoœci sk³adowej specular
+--------------------------------------------------------
+******************Kamera********************************
+
+Klawisz		Dzia³anie
+--------------------------------------------------------
+PAGE UP		Przesuniêcie kamery w lewo
+PAGE DOWN	Przesuniêcie kamery w prawo
+HOME		Przesuniêcie kamery w dó³
+END		Przesuniêcie kamery w górê
+INSERT		Przybli¿enie
+DELETE		Oddalenie
+strza³ki	Obroty kamery
+--------------------------------------------------------
+******************Chwytak*******************************
+
+Klawisz		Dzia³anie
+--------------------------------------------------------
+NUM_+		Rozwarcie ramion chwytaka
+NUM_-		Zamkniêcie ramion chwytaka
+NUM_8		Obni¿enie chwytaka
+NUM_2		Podniesienie chwytaka
+NUM_4		Przesuniêcie chwytaka w lewo
+NUM_6		Przesuniêcie chwytaka w prawo
+NUM_7		Przesuniêcie chwytaka do obserwatora
+NUM_1		Osuniêcie chwytaka od obserwatora
+--------------------------------------------------------
+******************Taœma*********************************
+
+Klawisz		Dzia³anie
+--------------------------------------------------------
+Prawy SHIFT	Zwiêkszenie prêdkoœci taœmy
+Prawy CTRL	Zmniejszenie prêdkoœci taœmy
+ENTER		W³¹czenie taœmy
+;		Wy³¹czenie taœmy
+--------------------------------------------------------
+******************Fizyka********************************
+
+Klawisz		Dzia³anie
+--------------------------------------------------------
+Lewy SHIFT	Zwiêkszenie prêdkoœci upadku
+Lewy CTRL	Zmniejszenie prêdkoœci upadku
+ 

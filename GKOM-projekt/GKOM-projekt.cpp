@@ -23,6 +23,9 @@ GLfloat lightStr = 1.0f;
 GLfloat light_x = -1.0f;
 GLfloat light_y = -10.0f;
 GLfloat light_z = 5.0f;
+GLfloat acceleration = 0.005f;
+GLfloat beltSpeed = 0.001f;
+GLboolean beltOn = true;
 Scene* scene;
 struct Light {
 	glm::vec3 position;
@@ -177,6 +180,32 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		light.specular[1] -= 0.1f;
 		light.specular[2] -= 0.1f;
 	}
+	if (key == GLFW_KEY_LEFT_SHIFT)
+	{
+		acceleration += 0.001f;
+	}
+	if (key == GLFW_KEY_LEFT_CONTROL)
+	{
+		if (acceleration > 0.001f)
+			acceleration -= 0.001f;
+	}
+	if (key == GLFW_KEY_RIGHT_SHIFT)
+	{
+		beltSpeed += 0.001f;
+	}
+	if (key == GLFW_KEY_RIGHT_CONTROL)
+	{
+		if (beltSpeed > 0.001f)
+			beltSpeed -= 0.001f;
+	}
+	if (key == GLFW_KEY_ENTER)
+	{
+		beltOn = true;
+	}
+	if (key == GLFW_KEY_SEMICOLON)
+	{
+		beltOn = false;
+	}
 }
 
 int main()
@@ -255,7 +284,9 @@ int main()
 			glUniform3f(lightPosLoc, light.position[0], light.position[1], light.position[2]);
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-			
+			scene->setAcceleration(acceleration);
+			scene->getBelt()->setSpeed(beltSpeed);
+			scene->getBelt()->setOn(beltOn);
 			scene->getHolder()->setHolderPosition(glm::vec3(arm_x,1.0f, arm_z));
 			scene->getHolder()->setLowerCylinderOuthrusting(lowerCylinderMove);
 			scene->getHolder()->setOpenig(arms_angle);
